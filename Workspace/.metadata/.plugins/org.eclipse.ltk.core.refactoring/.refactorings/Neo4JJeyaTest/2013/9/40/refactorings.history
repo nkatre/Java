@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;org.neo4j.examples.main&apos; to &apos;org.neo4j.examples.service&apos;&#x0A;- Original project: &apos;Neo4JJeyaTest&apos;&#x0A;- Original element: &apos;Neo4JJeyaTest/src/org.neo4j.examples.main&apos;&#x0A;- Renamed element: &apos;Neo4JJeyaTest/src/org.neo4j.examples.service&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;org.neo4j.examples.main&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;org.neo4j.examples.main" name="org.neo4j.examples.service" qualified="false" references="true" stamp="1380500481953" textual="false" version="1.0"/>
+</session>

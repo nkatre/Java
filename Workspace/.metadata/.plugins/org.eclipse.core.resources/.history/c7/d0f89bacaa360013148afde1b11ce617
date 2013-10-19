@@ -1,0 +1,59 @@
+package general;
+
+public class QuickSort {
+	
+	Integer[] list;
+	
+	QuickSort(Integer[] list) {
+		this.list = list;
+	}
+	
+	public void sort() {
+		quickSort(list, list.length);
+	}
+	
+private Integer[] bubbleSort(Integer[] list, int n) {
+		
+		if(n==0) 
+			return list;
+		
+		if(null==list)
+			return null;
+		
+		int max = list[n-1];
+		int pointer=-1;
+		
+		//for (int i=0; i<list.length; i++) {
+			//System.out.print(" " + list[i]);
+		//}
+		//System.out.println();
+		
+		for(int i=(n-2); i>=0;i--) {		
+			if(list[i] > max) {
+				max = list[i];
+				pointer = i;
+			}
+		}
+		//System.out.println("n: " + n + " pointer: " + pointer);
+		
+		if(pointer != -1) {
+			list[pointer] = list[n-1];
+			list[n-1] = max;
+		}
+		n = n-1;
+		return bubbleSort(list, n);
+	}
+	
+	
+	public static void main(String[] args) {
+		Integer[] l = {555,6,123,21,9};
+		QuickSort b = new QuickSort(l);
+		b.sort();
+		
+		for (int i=0; i<b.list.length; i++) {
+			System.out.print(" " + b.list[i]);
+		}
+		System.out.println();
+	}
+
+}

@@ -1,0 +1,15 @@
+package general;
+
+public class QuickSort {
+	
+	Integer[] list;
+	
+	QuickSort(Integer[] list) {
+		this.list = list;
+	}
+	
+	public void sort() {
+		quickSort(list, list.length);
+	}
+
+}

@@ -1,0 +1,86 @@
+package general;
+
+ interface Queue<T> {
+
+	public boolean enQueue(T data);
+	
+	public T peek();
+	
+	public T poll();
+	
+	public int size();
+
+}
+
+public class DoublyLinkedListQueue<T> implements Queue<T> {
+	
+	private DoublyLinkedList<T> queue = new DoublyLinkedList<T>();
+	
+	private int capacity;
+	
+	DoublyLinkedListQueue() {
+		super();
+		capacity = 5;
+	}
+
+
+	DoublyLinkedListQueue(int capacity) {
+		super();
+		this.capacity = capacity;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	@Override
+	public boolean enQueue(T data) {
+		
+		if(size() < capacity) {
+			queue.insert(size(), data);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public T peek() {
+		return queue.getValue(0);
+	}
+
+	@Override
+	public T poll() {
+		T data = queue.getValue(0);
+		queue.remove(0);
+		return data;
+	}
+
+	@Override
+	public int size() {
+		if(null == queue)
+			return 0;
+		return queue.size();
+	}
+	
+	@Override
+	public String toString() {
+		return queue.toString();
+	}
+	
+	public static void main (String[] args) {
+		DoublyLinkedListQueue<String> queue = new DoublyLinkedListQueue<String>(5);
+		System.out.println(queue.enQueue("1"));
+		System.out.println(queue.enQueue("2"));
+		System.out.println(queue.enQueue("3"));
+		System.out.println(queue.enQueue("4"));
+		System.out.println(queue.enQueue("5"));
+		System.out.println(queue.enQueue("6"));
+		System.out.println(queue);
+		
+	}
+	
+}

@@ -1,0 +1,8 @@
+package general;
+
+public class DoublyLinkedList<T> {
+	
+	
+	class Node
+
+}

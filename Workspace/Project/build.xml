@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<project name='ws-async' default='help' basedir='.'>
+
+	<!-- ========================================= -->
+
+	<target name='help'>
+		<echo>
+			RESTful Web Service - Blog
+			
+			Requires:
+				1. Apache Wink
+				2. Tomcat (1.6.x)
+		</echo>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='init'>
+		<property name='webcontent.dir' value='${basedir}/WebContent' />
+		<property name='build.dir' value='${basedir}/build' />
+		<property name='blog.war' value='${build.dir}/OneVillage.war' />
+
+		<!-- installation specific -->
+				<property name='wink.home' value='apache-wink-1.1.3-incubating' />
+				<property name='junit.jar' value='lib/junit-4.8.1.jar' />
+				<property name='tomcat.home' value='/usr/local/apache-tomcat-6.0.33' />
+
+		<path id='clt.classpath'>
+			<pathelement location='${basedir}/classes' />
+			<pathelement location='${junit.jar}' />
+			<pathelement location='${wink.home}/dist/wink-1.1.3-incubating.jar' />
+			<fileset dir='${wink.home}/lib'>
+				<include name='**/*.jar' />
+			</fileset>
+			<fileset dir='${basedir}/lib'>
+				<include name='**/*.jar' />
+			</fileset>
+		</path>
+
+		<path id='build.classpath'>
+			<pathelement location='${basedir}/classes' />
+			<pathelement location='${junit.jar}' />
+			<fileset dir='${wink.home}/lib'>
+				<include name='**/*.jar' />
+			</fileset>
+			<fileset dir='${wink.home}/dist'>
+				<include name='**/*.jar' />
+			</fileset>
+			<fileset dir='${basedir}/lib'>
+				<include name='**/*.jar' />
+			</fileset>
+		</path>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='clean' depends='init'>
+		<delete dir='${build.dir}' />
+		<delete dir='${basedir}/classes' />
+		<mkdir dir='${basedir}/classes' />
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='compile' depends='init'>
+		<javac debug='on' fork='true' destdir='${basedir}/classes' srcdir='${basedir}/src' classpathref='build.classpath'>
+		</javac>
+                <copy file="log4j.properties" toDir="${basedir}/classes" />
+                <copy file="logging.properties" toDir="${basedir}/classes" />
+                <delete file="${webcontent.dir}/WEB-INF/configuration.properties" />
+                <copy file="configuration.properties" tofile="${webcontent.dir}/WEB-INF/configuration.properties" />
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='war' depends='clean,compile'>
+		<mkdir dir='${build.dir}' />
+		<war destfile="${blog.war}" webxml="${webcontent.dir}/WEB-INF/web.xml">
+			<webinf dir="${webcontent.dir}/WEB-INF" includes="**/*" />
+			<classes dir="${basedir}/classes" includes="**/*" />
+			<lib dir="${basedir}/lib" includes="**/*.jar" />
+			<lib file="${wink.home}/lib/slf4j-api-1.6.1.jar" />
+			<lib file="${wink.home}/lib/slf4j-simple-1.6.1.jar" />
+			<lib file="${wink.home}/lib/jsr311-api-1.1.1.jar" />
+			<lib file="${wink.home}/lib/commons-lang-2.3.jar" />
+			<lib file="${wink.home}/lib/activation-1.1.jar" />
+			<lib file="${wink.home}/dist/wink-common-1.1.3-incubating.jar" />
+			<lib file="${wink.home}/dist/wink-server-1.1.3-incubating.jar" />
+			<lib file="${wink.home}/dist/wink-1.1.2-incubating.jar" />
+		</war>
+	</target>
+
+	<!-- ========================================= -->
+
+	<target name='deploy' depends='war'>
+		<delete dir='${tomcat.home}/webapps/blog' />
+		<copy todir='${tomcat.home}/webapps' file='${blog.war}' overwrite='true' />
+	</target>
+
+	<!-- ========================================= -->
+
+</project>

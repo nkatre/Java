@@ -1,0 +1,367 @@
+2013-09-27 09:42:58.143+0000 INFO  [org.neo4j]: --- INITIALIZED diagnostics START ---
+2013-09-27 09:42:58.187+0000 INFO  [org.neo4j]: Neo4j Kernel properties:
+    neostore.propertystore.db.mapped_memory=82M
+    neostore.nodestore.db.mapped_memory=22M
+    neostore.relationshipstore.db.mapped_memory=100M
+    neostore.propertystore.db.strings.mapped_memory=70M
+    store_dir=target/neo4j-hello-db
+    neostore.propertystore.db.arrays.mapped_memory=79M
+    ephemeral=false
+2013-09-27 09:42:58.191+0000 INFO  [org.neo4j]: Diagnostics providers:
+    org.neo4j.kernel.configuration.Config
+    org.neo4j.kernel.info.DiagnosticsManager
+    SYSTEM_MEMORY
+    JAVA_MEMORY
+    OPERATING_SYSTEM
+    JAVA_VIRTUAL_MACHINE
+    CLASSPATH
+    LIBRARY_PATH
+    SYSTEM_PROPERTIES
+    NETWORK
+2013-09-27 09:42:58.194+0000 INFO  [org.neo4j]: System memory information:
+    Total Physical memory: 5.91 GB
+    Free Physical memory: 2.83 GB
+    Committed virtual memory: 211.24 MB
+    Total swap space: 11.82 GB
+    Free swap space: 7.18 GB
+2013-09-27 09:42:58.212+0000 INFO  [org.neo4j]: JVM memory information:
+    Free  memory: 75.49 MB
+    Total memory: 90.69 MB
+    Max   memory: 1.31 GB
+    Garbage Collector: PS Scavenge: [PS Eden Space, PS Survivor Space]
+    Garbage Collector: PS MarkSweep: [PS Eden Space, PS Survivor Space, PS Old Gen, PS Perm Gen]
+    Memory Pool: Code Cache (Non-heap memory): committed=2.44 MB, used=505.00 kB, max=48.00 MB, threshold=0.00 B
+    Memory Pool: PS Eden Space (Heap memory): committed=23.63 MB, used=15.20 MB, max=496.75 MB, threshold=?
+    Memory Pool: PS Survivor Space (Heap memory): committed=3.94 MB, used=0.00 B, max=3.94 MB, threshold=?
+    Memory Pool: PS Old Gen (Heap memory): committed=63.13 MB, used=0.00 B, max=1009.38 MB, threshold=0.00 B
+    Memory Pool: PS Perm Gen (Non-heap memory): committed=20.75 MB, used=5.90 MB, max=82.00 MB, threshold=0.00 B
+2013-09-27 09:42:58.238+0000 INFO  [org.neo4j]: Operating system information:
+    Operating System: Windows 7; version: 6.1; arch: amd64; cpus: 4
+    Process id: 10236@JeyaBalaji-PC
+    Byte order: LITTLE_ENDIAN
+    Local timezone: America/Los_Angeles
+2013-09-27 09:42:58.260+0000 INFO  [org.neo4j]: JVM information:
+    VM Name: Java HotSpot(TM) 64-Bit Server VM
+    VM Vendor: Oracle Corporation
+    VM Version: 23.5-b02
+    JIT compiler: HotSpot 64-Bit Tiered Compilers
+    VM Arguments: [-Dfile.encoding=Cp1252]
+2013-09-27 09:42:58.263+0000 INFO  [org.neo4j]: Java classpath:
+     [bootstrap] C:\Program Files\Java\jre7\lib\resources.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jackson-mapper-asl-1.7.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\commons-lang-2.3.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jersey-server-1.6.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\postgresql-9.2-1003.jdbc4.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/gson-1.7.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\asm-3.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/wink-common-1.1.3-incubating.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/geronimo-jta_1.1_spec-1.1.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\StrandZkClient.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\stax-api-1.0-2.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\mongo-2.10.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/mail-1.4.4.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/mongo-2.10.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jackson-xc-1.7.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/commons-lang-2.3.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jackson-core-2.2.3.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\slf4j-api-1.6.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\zkclient-0.1.0.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jersey-servlet-1.10.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-jmx-1.9.3.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jersey-multipart-1.6.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/log4j-1.2.16.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/org.apache.servicemix.bundles.jline-0.9.94_1.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-shell-1.9.3.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/dnsns.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/stax-api-1.0-2.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\commons-io-2.4.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jersey-servlet-1.10.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jersey-client-1.6.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/zookeeper-3.3.3.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/activation-1.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jettison-1.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\junit-4.8.1.jar
+     [bootstrap] C:\Program Files\Java\jre7\lib\jfr.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jsoup-1.7.2.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-lucene-index-1.9.3.jar
+     [bootstrap] C:\Program Files\Java\jre7\lib\rt.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\bin
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/gson-2.2.4.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/localedata.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\json-lib-2.4-jdk15.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jersey-json-1.6.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\zookeeper-3.3.3.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/sunjce_provider.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\mimepull-1.3.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jaxb-api-2.2.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-udc-1.9.3.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jaxb-api-2.2.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/commons-io-2.4.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/lucene-core-3.6.2.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/sunec.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\slf4j-simple-1.6.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/json-lib-2.4-jdk15.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/slf4j-simple-1.6.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jersey-core-1.6.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-graph-matching-1.9.3.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/zipfs.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jaxb-impl-2.2.1.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jersey-json-1.6.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/jaccess.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/concurrentlinkedhashmap-lru-1.3.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\gson-2.2.4.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jersey-client-1.6.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\wink-server-1.1.3-incubating.jar
+     [bootstrap] C:\Program Files\Java\jre7\lib\jsse.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/asm-3.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jackson-all-1.8.5.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jackson-xc-1.7.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/mimepull-1.3.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/StrandZkClient.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/server-api-1.9.3.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\activation-1.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jettison-1.1.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/scala-library-2.10.0.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jackson-core-asl-1.7.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jackson-mapper-asl-1.7.1.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-graph-algo-1.9.3.jar
+     [bootstrap] C:\Program Files\Java\jre7\lib\jce.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/bin/
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/postgresql-9.2-1003.jdbc4.jar
+     [bootstrap] C:\Program Files\Java\jre7\lib\sunrsasign.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-kernel-1.9.3.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\mongo-2.4.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/junit-4.8.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/zkclient-0.1.0.jar
+     [classpath + loader.0] file:/C:/neo4j-community-1.9.3/lib/neo4j-cypher-1.9.3.jar
+     [bootstrap] C:\Program Files\Java\jre7\classes
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jackson-core-asl-1.7.1.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/sunmscapi.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jackson-all-1.8.5.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\wink-common-1.1.3-incubating.jar
+     [loader.1] file:/C:/Program%20Files/Java/jre7/lib/ext/access-bridge-64.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jsoup-1.7.2.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jersey-server-1.6.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jsr311-api-1.1.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/wink-server-1.1.3-incubating.jar
+     [bootstrap] C:\Program Files\Java\jre7\lib\charsets.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jersey-core-1.6.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\mail-1.4.4.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\gson-1.7.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jsr311-api-1.1.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/slf4j-api-1.6.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\log4j-1.2.16.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jackson-core-2.2.3.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/jackson-jaxrs-1.7.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jackson-jaxrs-1.7.1.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jersey-multipart-1.6.jar
+     [classpath] C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project\lib\jaxb-impl-2.2.1.1.jar
+     [loader.0] file:/C:/Users/JeyaBalaji/Desktop/Eclipse%20Workspace/Project/lib/mongo-2.4.jar
+2013-09-27 09:42:58.285+0000 INFO  [org.neo4j]: Library path:
+    C:\Program Files\Java\jre7\bin
+    C:\Windows\Sun\Java\bin
+    C:\Windows\System32
+    C:\Windows
+    C:\Program Files\Common Files\Microsoft Shared\Windows Live
+    C:\Program Files (x86)\Common Files\microsoft shared\Windows Live
+    C:\Windows\System32
+    C:\Windows
+    C:\Windows\System32\wbem
+    C:\Windows\System32\WindowsPowerShell\v1.0
+    C:\Program Files (x86)\Windows Live\Shared
+    C:\Program Files\Java\jdk1.7.0_09\bin
+    C:\apache-maven-3.0.4-bin\apache-maven-3.0.4\bin
+    C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project
+2013-09-27 09:42:58.294+0000 INFO  [org.neo4j]: System.properties:
+    sun.boot.library.path = C:\Program Files\Java\jre7\bin
+    path.separator = ;
+    file.encoding.pkg = sun.io
+    user.country = US
+    user.script = 
+    sun.java.launcher = SUN_STANDARD
+    sun.os.patch.level = Service Pack 1
+    user.dir = C:\Users\JeyaBalaji\Desktop\Eclipse Workspace\Project
+    user.variant = 
+    sun.jnu.encoding = Cp1252
+    sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+    user.home = C:\Users\JeyaBalaji
+    user.timezone = America/Los_Angeles
+    file.encoding = Cp1252
+    user.name = JeyaBalaji
+    sun.java.command = edu.sjsu.cmpe295b.planhercareer.blog.dao.EmbeddedNeo4j
+    sun.arch.data.model = 64
+    user.language = en
+    awt.toolkit = sun.awt.windows.WToolkit
+    file.separator = \
+    sun.io.unicode.encoding = UnicodeLittle
+    sun.cpu.endian = little
+    sun.desktop = windows
+    sun.cpu.isalist = amd64
+2013-09-27 09:42:58.297+0000 INFO  [org.neo4j]: Network information:
+    Interface Software Loopback Interface 1:
+        address: 127.0.0.1
+        address: 0:0:0:0:0:0:0:1
+    Interface WAN Miniport (SSTP):
+    Interface WAN Miniport (L2TP):
+    Interface WAN Miniport (PPTP):
+    Interface WAN Miniport (PPPOE):
+    Interface WAN Miniport (IPv6):
+    Interface WAN Miniport (Network Monitor):
+    Interface WAN Miniport (IP):
+    Interface RAS Async Adapter:
+    Interface WAN Miniport (IKEv2):
+    Interface Realtek PCIe FE Family Controller:
+        address: fe80:0:0:0:4869:ccd5:141d:d751%11
+    Interface Microsoft 6to4 Adapter:
+    Interface Dell Wireless 1702 802.11b/g/n:
+        address: 192.168.1.73
+        address: fe80:0:0:0:c2e:7574:4478:604c%13
+    Interface Bluetooth Device (Personal Area Network):
+        address: fe80:0:0:0:61e5:10f8:b381:e9b6%14
+    Interface Bluetooth Device (RFCOMM Protocol TDI):
+    Interface Teredo Tunneling Pseudo-Interface:
+        address: 2001:0:9d38:90d7:20c5:3cfa:9424:6a13
+        address: fe80:0:0:0:20c5:3cfa:9424:6a13%16
+    Interface Microsoft ISATAP Adapter #2:
+    Interface Microsoft ISATAP Adapter #3:
+        address: fe80:0:0:0:0:5efe:c0a8:149%18
+    Interface Microsoft ISATAP Adapter:
+    Interface Realtek PCIe FE Family Controller-QoS Packet Scheduler-0000:
+    Interface Realtek PCIe FE Family Controller-WFP LightWeight Filter-0000:
+    Interface Dell Wireless 1702 802.11b/g/n-Virtual WiFi Filter Driver-0000:
+    Interface Dell Wireless 1702 802.11b/g/n-QoS Packet Scheduler-0000:
+    Interface WAN Miniport (IPv6)-QoS Packet Scheduler-0000:
+    Interface WAN Miniport (IP)-QoS Packet Scheduler-0000:
+    Interface WAN Miniport (Network Monitor)-QoS Packet Scheduler-0000:
+    Interface Dell Wireless 1702 802.11b/g/n-Native WiFi Filter Driver-0000:
+    Interface Dell Wireless 1702 802.11b/g/n-WFP LightWeight Filter-0000:
+2013-09-27 09:42:58.382+0000 INFO  [org.neo4j]: --- INITIALIZED diagnostics END ---
+2013-09-27 09:42:58.963+0000 INFO  [org.neo4j]: Creating new db @ target\neo4j-hello-db\neostore
+2013-09-27 09:42:59.047+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.nodestore.db] brickCount=0 brickSize=230679b mappedMem=23068672b (storeSize=0b)
+2013-09-27 09:42:59.052+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.nodestore.db hit=1 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.192+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-09-27 09:42:59.199+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-09-27 09:42:59.201+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.204+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.213+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-09-27 09:42:59.216+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-09-27 09:42:59.222+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.strings] brickCount=0 brickSize=73344b mappedMem=73400320b (storeSize=128b)
+2013-09-27 09:42:59.228+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-09-27 09:42:59.272+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-09-27 09:42:59.291+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.arrays] brickCount=0 brickSize=82816b mappedMem=82837504b (storeSize=128b)
+2013-09-27 09:42:59.306+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db] brickCount=0 brickSize=859811b mappedMem=85983232b (storeSize=0b)
+2013-09-27 09:42:59.311+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshipstore.db] brickCount=0 brickSize=1048575b mappedMem=104857600b (storeSize=0b)
+2013-09-27 09:42:59.314+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.nodestore.db] brickCount=0 brickSize=23067b mappedMem=23068672b (storeSize=9b)
+2013-09-27 09:42:59.320+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-09-27 09:42:59.326+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.329+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.345+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.strings hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.350+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.index.keys hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.353+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.index hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.355+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.358+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.361+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshipstore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.380+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.nodestore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.385+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore hit=0 miss=8 switches=0 ooe=0
+2013-09-27 09:42:59.405+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-09-27 09:42:59.415+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-09-27 09:42:59.427+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.strings] brickCount=0 brickSize=73344b mappedMem=73400320b (storeSize=128b)
+2013-09-27 09:42:59.433+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-09-27 09:42:59.439+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-09-27 09:42:59.445+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db.arrays] brickCount=0 brickSize=82816b mappedMem=82837504b (storeSize=128b)
+2013-09-27 09:42:59.448+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.propertystore.db] brickCount=0 brickSize=859811b mappedMem=85983232b (storeSize=0b)
+2013-09-27 09:42:59.452+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.relationshipstore.db] brickCount=0 brickSize=1048575b mappedMem=104857600b (storeSize=0b)
+2013-09-27 09:42:59.455+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore.nodestore.db] brickCount=0 brickSize=23067b mappedMem=23068672b (storeSize=9b)
+2013-09-27 09:42:59.460+0000 INFO  [org.neo4j]: [target\neo4j-hello-db\neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=54b)
+2013-09-27 09:42:59.482+0000 INFO  [org.neo4j]: Opened logical log [target\neo4j-hello-db\nioneo_logical.log.1] version=0, lastTxId=1 (clean)
+2013-09-27 09:42:59.492+0000 INFO  [org.neo4j]: TM new log: tm_tx_log.1
+2013-09-27 09:42:59.569+0000 INFO  [org.neo4j]: Opened logical log [target\neo4j-hello-db\index\lucene.log.1] version=0, lastTxId=1 (clean)
+2013-09-27 09:42:59.587+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2013-09-27 09:42:59.588+0000 INFO  [org.neo4j]: Graph Database: org.neo4j.kernel.EmbeddedGraphDatabase StoreId[time:1380274978966, id:-2909314252190679805, store version: 13561656364791302]
+2013-09-27 09:42:59.588+0000 INFO  [org.neo4j]: Kernel version: Neo4j - Graph Database Kernel 1.9.3
+2013-09-27 09:42:59.588+0000 INFO  [org.neo4j]: Neo4j component versions:
+2013-09-27 09:42:59.591+0000 INFO  [org.neo4j]:   Neo4j - Graph Database Kernel 1.9.3
+2013-09-27 09:42:59.592+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2013-09-27 09:42:59.603+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2013-09-27 09:42:59.604+0000 INFO  [org.neo4j]: Store versions:
+    Store versions:
+      NeoStore v0.A.0
+      NodeStore v0.A.0
+      RelationshipStore v0.A.0
+      RelationshipTypeStore v0.A.0
+      PropertyStore v0.A.0
+      PropertyIndexStore v0.A.0
+      StringPropertyStore v0.A.0
+      ArrayPropertyStore v0.A.0
+2013-09-27 09:42:59.607+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2013-09-27 09:42:59.607+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2013-09-27 09:42:59.607+0000 INFO  [org.neo4j]: Id usage:
+    Id usage:
+      NodeStore: used=1 high=0
+      RelationshipStore: used=0 high=-1
+      RelationshipTypeStore: used=0 high=-1
+      PropertyStore: used=0 high=-1
+      PropertyIndexStore: used=0 high=-1
+      StringPropertyStore: used=1 high=0
+      ArrayPropertyStore: used=1 high=0
+2013-09-27 09:42:59.610+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2013-09-27 09:42:59.610+0000 INFO  [org.neo4j]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS START ---
+2013-09-27 09:42:59.610+0000 INFO  [org.neo4j]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS END ---
+2013-09-27 09:42:59.611+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2013-09-27 09:42:59.613+0000 INFO  [org.neo4j]: Disk space on partition (Total / Free / Free %): 979126407168 / 908399456256 / 92
+Storage files: (filename : modification date - size)
+      active_tx_log: 2013-09-27T02:42:59-0700 - 11.00 B
+      index:
+        lucene-store.db: 2013-09-27T02:42:59-0700 - 40.00 B
+        lucene.log.1: 2013-09-27T02:42:59-0700 - 16.00 B
+        lucene.log.active: 2013-09-27T02:42:59-0700 - 4.00 B
+      - Total: 2013-09-27T02:42:59-0700 - 60.00 B
+      lock: 2013-09-27T02:42:58-0700 - 0.00 B
+      messages.log: 2013-09-27T02:42:57-0700 - 23.47 kB
+      neostore: 2013-09-27T02:42:59-0700 - 54.00 B
+      neostore.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.nodestore.db: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.nodestore.db.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.propertystore.db: 2013-09-27T02:42:59-0700 - 0.00 B
+      neostore.propertystore.db.arrays: 2013-09-27T02:42:59-0700 - 128.00 B
+      neostore.propertystore.db.arrays.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.propertystore.db.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.propertystore.db.index: 2013-09-27T02:42:59-0700 - 0.00 B
+      neostore.propertystore.db.index.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.propertystore.db.index.keys: 2013-09-27T02:42:59-0700 - 38.00 B
+      neostore.propertystore.db.index.keys.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.propertystore.db.strings: 2013-09-27T02:42:59-0700 - 128.00 B
+      neostore.propertystore.db.strings.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.relationshipstore.db: 2013-09-27T02:42:59-0700 - 0.00 B
+      neostore.relationshipstore.db.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.relationshiptypestore.db: 2013-09-27T02:42:59-0700 - 0.00 B
+      neostore.relationshiptypestore.db.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      neostore.relationshiptypestore.db.names: 2013-09-27T02:42:59-0700 - 38.00 B
+      neostore.relationshiptypestore.db.names.id: 2013-09-27T02:42:59-0700 - 9.00 B
+      nioneo_logical.log.1: 2013-09-27T02:42:59-0700 - 16.00 B
+      nioneo_logical.log.active: 2013-09-27T02:42:59-0700 - 4.00 B
+      store_lock: 2013-09-27T02:42:58-0700 - 0.00 B
+      tm_tx_log.1: 2013-09-27T02:42:59-0700 - 0.00 B
+2013-09-27 09:42:59.635+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2013-09-27 09:42:59.637+0000 INFO  [org.neo4j]: Started - database is now available
+2013-09-27 09:42:59.637+0000 INFO  [org.neo4j]: GC Monitor started. 
+2013-09-27 09:42:59.696+0000 INFO  [org.neo4j]: Shutdown started
+2013-09-27 09:42:59.696+0000 INFO  [org.neo4j]: Stopping - database is now unavailable
+2013-09-27 09:42:59.698+0000 INFO  [org.neo4j]: GC Monitor stopped. 
+2013-09-27 09:42:59.714+0000 INFO  [org.neo4j]: Closed log target\neo4j-hello-db\index\lucene.log
+2013-09-27 09:42:59.721+0000 INFO  [org.neo4j]: TM shutting down
+2013-09-27 09:42:59.723+0000 INFO  [org.neo4j]: Close invoked with 1 running transaction(s). 
+2013-09-27 09:42:59.726+0000 INFO  [org.neo4j]: Dirty log: target\neo4j-hello-db\nioneo_logical.log.1 now closed. Recovery will be started automatically next time it is opened.
+2013-09-27 09:42:59.729+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshiptypestore.db.names hit=0 miss=1 switches=0 ooe=0
+2013-09-27 09:42:59.733+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshiptypestore.db hit=0 miss=1 switches=0 ooe=0
+2013-09-27 09:42:59.764+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.strings hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.771+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.index.keys hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.783+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.index hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.818+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.825+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.propertystore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.855+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.relationshipstore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.860+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore.nodestore.db hit=0 miss=0 switches=0 ooe=0
+2013-09-27 09:42:59.909+0000 INFO  [org.neo4j]: target\neo4j-hello-db\neostore hit=0 miss=15 switches=0 ooe=0
+2013-09-27 09:42:59.921+0000 INFO  [org.neo4j]: NeoStore closed
+2013-09-27 09:42:59.921+0000 INFO  [org.neo4j]: --- STOPPING diagnostics START ---
+2013-09-27 09:42:59.922+0000 INFO  [org.neo4j]: --- STOPPING diagnostics END ---

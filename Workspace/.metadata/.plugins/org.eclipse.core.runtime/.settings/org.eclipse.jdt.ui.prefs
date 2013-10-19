@@ -1,0 +1,21 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="org.neo4j.graphdb.GraphDatabaseService"><rhs name\="org.neo4j.kernel.EmbeddedGraphDatabase"/></lhs><lhs name\="edu.sjsu.practice.TestLinkedListCycle$LinkedList$LinkedListNode"><rhs name\="edu.sjsu.practice.TestLinkedListCycle$LinkedList$LinkedListNode"/></lhs><lhs name\="edu.sjsu.practice.LinkedList"><rhs name\="edu.sjsu.practice.LinkedList"/></lhs><lhs name\="edu.sjsu.practice.MergeTwoSortedList"><rhs name\="edu.sjsu.practice.MergeTwoSortedList"/></lhs><lhs name\="java.util.AbstractQueue"><rhs name\="java.util.PriorityQueue"/></lhs><lhs name\="java.util.Queue"><rhs name\="java.util.PriorityQueue"/></lhs><lhs name\="java.util.Collection"><rhs name\="java.util.PriorityQueue"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.PriorityQueue"/></lhs><lhs name\="java.util.AbstractCollection"><rhs name\="java.util.PriorityQueue"/></lhs><lhs name\="java.util.PriorityQueue"><rhs name\="java.util.PriorityQueue"/></lhs><lhs name\="yahoo.ChemicalEquation$ChemicalFormula"><rhs name\="yahoo.ChemicalEquation$ChemicalFormula"/></lhs><lhs name\="yahoo.ChemicalEquation"><rhs name\="yahoo.ChemicalEquation"/></lhs><lhs name\="general.LinkedListCareerCup"><rhs name\="general.LinkedListCareerCup"/></lhs><lhs name\="general.BubbleSort"><rhs name\="general.BubbleSort"/></lhs><lhs name\="general.ModerateCareerCup"><rhs name\="general.ModerateCareerCup"/></lhs><lhs name\="general.SortingAndSearchingCareerCup"><rhs name\="general.SortingAndSearchingCareerCup"/></lhs><lhs name\="general.Test"><rhs name\="general.Test"/></lhs></history>
+content_assist_number_of_computers=13
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+fontPropagated=true
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.ui.editor.tab.width=
+org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.templates_migrated=true
+org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
+proposalOrderMigrated=true
+sourceHoverBackgroundColor=250,251,197
+spelling_locale_initialized=true
+tabWidthPropagated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

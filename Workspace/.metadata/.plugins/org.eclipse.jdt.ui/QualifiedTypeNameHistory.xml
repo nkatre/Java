@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.neo4j.graphdb.GraphDatabaseService"/>
+<fullyQualifiedTypeName name="org.neo4j.kernel.EmbeddedGraphDatabase"/>
+<fullyQualifiedTypeName name="edu.sjsu.practice.TestLinkedListCycle.LinkedList.LinkedListNode"/>
+<fullyQualifiedTypeName name="edu.sjsu.practice.LinkedList.LinkedListNode"/>
+<fullyQualifiedTypeName name="edu.sjsu.practice.LinkedList"/>
+<fullyQualifiedTypeName name="edu.sjsu.practice.MergeTwoSortedList"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="edu.sjsu.practice.KClosestPointsToOrigin.ClosestPointComparator"/>
+<fullyQualifiedTypeName name="java.util.PriorityQueue"/>
+<fullyQualifiedTypeName name="java.util.AbstractCollection"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="yahoo.ChemicalEquation.ChemicalFormula"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="yahoo.ChemicalEquation"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="yahoo.XMLParser.MalformedXMLException"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="junit.framework.Assert"/>
+<fullyQualifiedTypeName name="general.BubbleSort"/>
+<fullyQualifiedTypeName name="Amazon.LinkedList"/>
+<fullyQualifiedTypeName name="general.LinkedListCareerCup"/>
+<fullyQualifiedTypeName name="general.LinkedListCareerCup.LList.Node"/>
+<fullyQualifiedTypeName name="general.ModerateCareerCup"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ConcurrentHashMap"/>
+<fullyQualifiedTypeName name="general.SortingAndSearchingCareerCup"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="general.Test"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,55 @@
+package general;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class BubbleSort {
+	
+	Integer[] list;
+	
+	BubbleSort(Integer[] list) {
+		this.list = list;
+	}
+	
+	public void sort() {
+		
+		getMaxToEndOfArray(list, list.length);
+			
+		for(int i=0; i<list.length; i++) {
+			System.out.print(list[i] + " ");
+		}
+		
+	}
+	
+	private Integer[] getMaxToEndOfArray(Integer[] list, int n) {
+		
+		if(null==list)
+			return null;
+		
+		if(n==0) 
+			return list;
+		
+		int max = list[n-1];
+		int pointer=-1;
+		
+		for(int i=(n-2); i>=0;i--) {		
+			if(list[i] > max) {
+				max = list[i];
+				pointer = i;
+			}
+		}
+		
+		list[pointer] = list[list.length-1];
+		list[list.length-1] = max;
+
+		return getMaxToEndOfArray(list, n--);
+	}
+	
+	
+	public static void main(String[] args) {
+		Integer[] list = {555,6,12,213,9};
+		BubbleSort b = new BubbleSort(list);
+		b.sort();
+	}
+
+}

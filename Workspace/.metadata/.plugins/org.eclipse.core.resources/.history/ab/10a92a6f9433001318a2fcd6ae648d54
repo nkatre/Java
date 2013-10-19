@@ -1,0 +1,19 @@
+package general;
+
+public interface Queue {
+
+	public void enQueue() {
+		
+	}
+	
+	public void deQueue() {
+		
+	}
+	
+	public int size() {
+		
+	}
+	
+	
+
+}

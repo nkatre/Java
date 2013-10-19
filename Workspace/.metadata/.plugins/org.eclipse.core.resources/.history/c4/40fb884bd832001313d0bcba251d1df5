@@ -1,0 +1,22 @@
+package general;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class LeastRecentlyUsed {
+	
+	List<Node> list = new LinkedList<Node>();
+	
+	Map<String, String> map = new HashMap<String, String>();
+	
+	
+	class Node {
+		String data;
+		String key;
+	}
+	
+	
+
+}

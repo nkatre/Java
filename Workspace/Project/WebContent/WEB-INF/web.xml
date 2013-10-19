@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app>
+	<display-name>RESTful Blog service (wink)</display-name>
+	<description>Web service using Apache Wink (RESTful)</description>
+
+	<servlet>
+		<servlet-name>OneVillage</servlet-name>
+		<servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>
+		<init-param>
+		
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>edu.sjsu.cmpe275.onevillage.blog.ws.BlogApplication</param-value>
+		
+		<!--
+			<param-name>applicationConfigLocation</param-name>
+			<param-value>/WEB-INF/application</param-value>
+		-->
+		</init-param>
+		<init-param>
+    		<param-name>propertiesLocation</param-name>
+    		<param-value>/WEB-INF/configuration.properties</param-value>
+  		</init-param>		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>OneVillage</servlet-name>
+	        <url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>

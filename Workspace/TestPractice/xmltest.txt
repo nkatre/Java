@@ -1,0 +1,6 @@
+<ledger> 
+<person> 
+<name>Jai</name><location>Bangalore</location> 
+</person> 
+<entries> 
+<entry><day>1</day><credit>50</credit><debit>40</debit></entry> 

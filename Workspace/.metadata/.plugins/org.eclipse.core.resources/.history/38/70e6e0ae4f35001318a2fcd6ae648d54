@@ -1,0 +1,90 @@
+package general;
+
+public class MergeSort<T> implements Comparable {
+	
+	T[] array;
+	
+	MergeSort(T[] data) {
+		this.array = data;
+	}
+	
+	public T[] sort() {
+		return mergeSort(this.array, 0, this.array.length);
+	}
+	
+	private T[] mergeSort(T[] array, int start, int end) {
+		
+		if(null == array) {
+			System.out.println("here 1");
+			return null;
+		}
+		
+		int midPosition = array.length/2;
+		
+		mergeSort(array, start, midPosition);
+		mergeSort(array, midPosition+1, end);
+		merge(array, start, midPosition, end);
+		
+		return null;
+	}
+	
+	private T[] merge(T[] array, int startPosition, int midPosition, int endPosition) {
+		int leftArraySize = midPosition - startPosition + 1;
+		int rightArraySize = endPosition - midPosition;
+		
+		T[] leftArray = (T[]) new Object[leftArraySize];
+		T[] rightArray = (T[]) new Object[rightArraySize];
+		
+		for(int i=0; i<leftArraySize; i++) {
+			leftArray[i] = array[startPosition+i-1];
+		}
+		
+		for(int i=0; i<rightArraySize; i++) {
+			rightArray[i] = array[midPosition+i];
+		}
+		
+		int leftArrayPointer = 0;
+		int rightArrayPointer = 0;
+		
+		for(int i=0; i< (endPosition - startPosition + 1); i++) {
+			if(((Comparable) leftArray[leftArrayPointer]).compareTo(rightArray[rightArrayPointer]) <= 0) {
+				array[i] = leftArray[leftArrayPointer];
+				leftArrayPointer++;
+			} else {
+				array[i] = rightArray[rightArrayPointer];
+				rightArrayPointer++;
+			}
+		}
+		
+		return array;
+	}
+	
+	@Override
+	public int compareTo(Object obj) {
+		return this.compareTo((T) obj);		
+	}
+	
+	@Override
+	public String toString(){
+		
+		if (null == array) {
+			return null;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i= 0; i< array.length; i++) {
+			sb.append(array[i]+ " ");
+		}
+		
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		Double[] array = {9.84, 12.0, 1.234};
+		MergeSort mSort = new MergeSort<Double>(array);
+		mSort.sort();
+		System.out.println(mSort);
+	}
+
+}

@@ -1,0 +1,55 @@
+package general;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public interface Queue<T> {
+
+	public boolean enQueue();
+	
+	public T peek();
+	
+	public T poll();
+	
+	public int size();
+
+}
+
+class LinkedListQueue<T> implements Queue<T> {
+	
+	private List<T> queue = new LinkedList<T>();
+	
+	private int capacity;
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	@Override
+	public boolean enQueue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public T peek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T poll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int size() {
+		return queue.size();
+	}
+	
+}

@@ -1,0 +1,16 @@
+package general;
+
+public class DoublyLinkedList<T> {
+	
+	Node head;
+	Node tail;
+	
+	
+	class Node {
+		T data;
+		Node next;
+		Node previous;
+		
+	}
+
+}

@@ -1,0 +1,41 @@
+package general;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class LeastRecentlyUsedCache {
+	
+	int cacheSize = 5;
+	
+	List<Node> list = new LinkedList<Node>();
+	
+	Map<String, String> map = new HashMap<String, String>();
+	
+	
+	class Node {
+		String data;
+		String key;
+	}
+	
+	// use case 1
+	public boolean insertInCache() {
+		
+	}
+	
+	// use case 2
+	public boolean removeEntryFromCache(){
+		
+	}
+	
+	// use case 3
+	public boolean hasValue(){
+		
+	}
+	
+	public boolean isFull() {
+		
+	}
+
+}

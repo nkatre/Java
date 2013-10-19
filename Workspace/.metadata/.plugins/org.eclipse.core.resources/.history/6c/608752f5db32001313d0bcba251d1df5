@@ -1,0 +1,99 @@
+package general;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class LeastRecentlyUsedCache {
+	
+	int cacheSize = 5;
+	
+	List<Node> list = new LinkedList<Node>();
+	
+	Map<String, String> map = new HashMap<String, String>();
+	
+	
+	class Node {
+		String data;
+		String key;
+		
+		Node(String key, String data) {
+			this.key = key;
+			this.data = data;
+			
+			
+		}
+
+		public String getData() {
+			return data;
+		}
+
+		public void setData(String data) {
+			this.data = data;
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+	}
+	
+	// use case 1
+	public boolean insertInCache(String key, String value) {
+		
+		if (list.size() < (cacheSize)) {
+			list.add(0, new Node(key, value));
+			map.put(key, value);			
+		} else {
+			
+			if(removeEntryFromCache()) {
+				list.add(0, new Node(key, value));
+				map.put(key, value);
+			} else {
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
+	
+	// use case 2
+	public boolean removeEntryFromCache(){
+		
+		Node node = list.get(list.size()-1);
+		String k = node.getKey();
+		list.remove(list.size()-1);
+		map.remove(k);
+		
+		return true;
+	}
+	
+	// use case 3
+	public String getValue(String key){
+		return map.get(key);		
+	}
+	
+	private boolean hasValue(String value){
+		
+		if(list.isEmpty())
+			return false;
+		
+		for(Node n: list) {
+			if(n.getData().equals(value)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean isFull() {
+		
+	}
+
+}

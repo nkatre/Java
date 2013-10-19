@@ -1,0 +1,15 @@
+package general;
+
+public class LeastRecentlyUsed {
+	
+	List<Node> list = new LinkedList<Node>();
+	
+	Map<String, String> map = new HashMap<String, String>();
+	
+	
+	class Node {
+		String data;
+		String key;
+	}
+
+}

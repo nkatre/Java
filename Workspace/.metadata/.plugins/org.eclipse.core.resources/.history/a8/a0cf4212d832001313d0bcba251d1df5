@@ -1,0 +1,13 @@
+package general;
+
+public class LeastRecentlyUsed {
+	
+	List
+	
+	
+	class Node {
+		String data;
+		String key;
+	}
+
+}

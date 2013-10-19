@@ -1,0 +1,68 @@
+package general;
+
+interface StackInterface<T> {
+
+	public boolean push(T data);
+	
+	public T peek();
+	
+	public T pop();
+	
+	public int size();
+
+}
+
+public class Stack<T> implements StackInterface<T>{
+	
+private DoublyLinkedList<T> stack = new DoublyLinkedList<T>();
+	
+	private int capacity;
+	
+	Stack() {
+		super();
+		capacity = 5;
+	}
+
+
+	Stack(int capacity) {
+		super();
+		this.capacity = capacity;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	@Override
+	public boolean push(T data) {
+		if(size() < capacity) {
+			stack.insert(size(), data);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public T peek() {
+		return stack.getValue(size()-1);
+	}
+
+	@Override
+	public T pop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
+}

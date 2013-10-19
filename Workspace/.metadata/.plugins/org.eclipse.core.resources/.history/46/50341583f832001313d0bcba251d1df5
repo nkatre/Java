@@ -1,0 +1,212 @@
+package general;
+
+import java.util.Iterator;
+
+public class DoublyLinkedList<T> {
+	
+	Node head;
+	Node tail;
+	
+	public boolean insert(T data) {
+		if(null==head) {
+			head = tail = new Node(data);
+			return true;
+		}
+		
+		Node newNode = new Node(data);
+		tail.next = newNode;
+		newNode.previous = tail;
+		tail = newNode;
+		return true;
+		
+	}
+	
+	public boolean insert(int index, T data) {
+		
+		if((index > size()) || (index < 0)) {
+			return false;
+		}
+		Node n = new Node(data);
+		
+		if (index == 0) {
+			head.previous = n;
+			n.next = head;
+			head = n;
+			return true;
+		} 
+		if(index == size()) {
+			tail.next = n;
+			n.previous = tail;
+			tail = n;
+			return true;
+		}
+		
+		Node pNode = head;
+		for (int i=0; i<index; i++) {
+			pNode = pNode.next;
+		}
+		pNode = pNode.previous;
+		pNode.next.previous = n;
+		n.next = pNode.next;
+		n.previous = pNode;
+		pNode.next = n;
+		
+		return true;
+	}
+	
+	public boolean remove(T data) {
+		
+		
+		return false;
+	}
+	
+
+	public boolean remove(int position) {
+		
+		if ((position < 0) || (position >= size())) 
+			return false;
+	
+		if(position==0) {
+			Node n = head;
+			n = null;
+			head = head.next;
+			head.previous = null;
+			return true;
+		}
+		if(position == (size()-1)) {
+			Node n = tail;
+			tail.previous.next = null;
+			tail = tail.previous;
+			n = null;
+			return true;
+		}
+		
+		Node n = head;
+		for(int i=0; i<position; i++) {
+			n = n.next;
+		}
+		n = n.previous;
+		
+		n.previous.next = n.next;
+		n.next.previous = n.previous;
+		n = null;
+		return true;
+	}
+	
+	public int getIndex(T data) {
+		
+		if (null == head) {
+			return -1;
+		}
+		
+		int i = 0;
+		Node n = head;
+		while (null != n) {
+			if(n.data == data) {
+				return i;
+			}
+			i++;
+		}
+		
+		return i;
+	}
+	
+	public Iterator getIterator() {
+		
+		
+		return null;
+	}
+	
+	public int size() {
+		Node n = head;
+		int size = 0;
+		while(null != n) {
+			size++;
+			n=n.next;
+		}
+		return size;
+	}
+	
+	@Override
+	public String toString() {
+		
+		if(null == head) {
+			System.out.println("------");
+			return null;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		Node n = head;
+		//sb.append(n.data + " ");
+		
+		while(true) {
+			sb.append(n.data + " ");
+			n = n.next;
+			if(null==n) {
+				break;
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	public 
+	
+	class Node {
+		T data;
+		Node next;
+		Node previous;
+		
+		public Node(T data) {
+			super();
+			this.data = data;
+		}
+		
+		public Node(T data, Node next, Node previous) {
+			super();
+			this.data = data;
+			this.next = next;
+			this.previous = previous;
+		}
+		
+		public T getData() {
+			return data;
+		}
+		public void setData(T data) {
+			this.data = data;
+		}
+		public Node getNext() {
+			return next;
+		}
+		public void setNext(Node next) {
+			this.next = next;
+		}
+		public Node getPrevious() {
+			return previous;
+		}
+		public void setPrevious(Node previous) {
+			this.previous = previous;
+		}
+		
+		@Override
+		public String toString() {
+			return "Node [data=" + data + ", next=" + next + ", previous="
+					+ previous + "]";
+		}
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		DoublyLinkedList<String> list = new DoublyLinkedList<String>();
+		list.insert("One");
+		System.out.println(list.toString());
+		list.insert("Two");
+		System.out.println(list.toString());
+		list.insert("Three");
+		System.out.println(list.toString());
+		
+		System.out.println(list.getIndex("Two"));
+	}
+	
+}

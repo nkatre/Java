@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;RESTCall.java&apos; to &apos;Neo4JJeyaTest/src/org.neo4j.examples.service&apos;&#x0A;- Original project: &apos;Project&apos;&#x0A;- Destination element: &apos;Neo4JJeyaTest/src/org.neo4j.examples.service&apos;&#x0A;- Original element: &apos;edu.sjsu.cmpe295b.planhercareer.blog.util.RESTCall.java&apos;" description="Copy compilation unit" destination="=Neo4JJeyaTest/src&lt;org.neo4j.examples.service" element1="/src&lt;edu.sjsu.cmpe295b.planhercareer.blog.util{RESTCall.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1381126327301" units="1" version="1.0"/>
+</session>

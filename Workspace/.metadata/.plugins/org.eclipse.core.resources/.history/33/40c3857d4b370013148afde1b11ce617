@@ -1,0 +1,17 @@
+package general;
+
+public class Test {
+	
+	Integer[] list;
+	
+	/*
+	 * quicksort
+	 */
+	public void sort(int start, int end) {
+		if(null==list)
+			return;
+		
+		
+	}
+
+}

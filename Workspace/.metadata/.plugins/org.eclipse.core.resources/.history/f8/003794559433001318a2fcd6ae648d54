@@ -1,0 +1,32 @@
+package general;
+
+public interface Queue {
+	
+	private static final int capacity;
+	
+	
+	
+	
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public void enQueue() {
+		
+	}
+	
+	public void deQueue() {
+		
+	}
+	
+	public int size() {
+		
+	}
+	
+	
+
+}

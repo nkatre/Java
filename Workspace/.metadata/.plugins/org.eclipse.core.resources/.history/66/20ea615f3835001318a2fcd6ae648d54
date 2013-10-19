@@ -1,0 +1,26 @@
+package general;
+
+public class MergeSort<T> implements Comparable {
+	
+	T[] array;
+	
+	MergeSort(T[] data) {
+		this.array = array;
+	}
+	
+	public T[] mergeSort() {
+		
+		return null;
+	}
+	
+	private T[] merge(T[], int startPosition, int endPosition) {
+		
+	}
+	
+	@Override
+	public int compareTo(Object obj) {
+		return this.compareTo((T) obj);
+		
+	}
+
+}

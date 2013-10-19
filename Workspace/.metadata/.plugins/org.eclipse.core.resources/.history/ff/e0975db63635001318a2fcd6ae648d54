@@ -1,0 +1,78 @@
+package general;
+
+public class InsertionSort {
+	
+	int[] array;
+	
+	InsertionSort(int[] array) {
+		super();
+		this.array = array;
+	}
+	
+	public int[] sort() {
+		
+		if(this.array == null)
+			return null;
+		
+		int arraySize = this.array.length;
+		
+		for(int i = 1; i<arraySize; i++) {
+			
+			System.out.print(" i:" + i);
+			
+			int key = array[i];
+			int position  = -1;
+			
+			for(int j = (i-1); j >=0; j--) {
+
+				System.out.print(" j:" + j);
+				
+				if(key < array[j]) {
+					position = j;
+					System.out.print(" breaking at:" + j);
+					//break;
+	
+				}
+			}
+			
+			System.out.println(" position: " + position);
+			
+			if(position !=-1) {
+				for(int z=i; z>position; z--) {
+					
+					System.out.println(" z:" + z);
+					array[z]=array[z-1];
+					
+				}
+			
+				array[position]=key;
+			}
+			System.out.println("---- " + this.toString());
+			
+		}
+		return array;
+	}
+	
+	public String toString(){
+		
+		if (null == array) {
+			return null;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i= 0; i< array.length; i++) {
+			sb.append(array[i]+ " ");
+		}
+		
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		int[] array = {9,2,1,4,3,2,1};
+		InsertionSort iSort = new InsertionSort(array);
+		iSort.sort();
+		System.out.println(iSort);
+	}
+
+}

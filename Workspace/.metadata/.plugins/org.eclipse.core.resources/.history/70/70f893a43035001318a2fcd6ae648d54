@@ -1,0 +1,33 @@
+package general;
+
+public class InsertionSort {
+	
+	int[] array;
+	
+	InsertionSort(int[] array) {
+		super();
+		this.array = array;
+	}
+	
+	public int[] sort() {
+		
+		if(this.array == null)
+			return null;
+		
+		int arraySize = this.array.length;
+		
+		for(int i = 1; i<arraySize; i++) {
+			for(int j = (i-1); j >=0; j--) {
+				if(array[i] < array[j]) {
+					int key = array[i];
+					for(int z=j; z<=i; z++) {
+						array
+					}
+				}
+			}
+			
+		}
+		return null;
+	}
+
+}
