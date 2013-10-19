@@ -10,9 +10,7 @@ public class StacksAndQueues {
 		int[] array = new int[30];
 		int stack1Base = 0;
 		int stack2Base = 9;
-		int stack3Base = 19;
-		
-		
+		int stack2Base = 19;
 	}
 	
 }
