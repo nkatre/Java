@@ -1,0 +1,57 @@
+package general;
+
+public class StacksAndQueues {
+	int[] array = new int[30];
+	int stack1Base = 0;
+	int stack2Base = 10;
+	int stack3Base = 20;
+	
+	int stack1Top = 9;
+	int stack2Top = 19;
+	int stack3Top = 29;
+	
+	int stack1Pointer = 0;
+	int stack2Pointer = 10;
+	int stack3Pointer = 20;
+	/*
+	 * Describe how you could use a single array to implement three stacks 
+	 */
+	// method 1 will give pre-alloted spaces for the threestacks
+	public void singleArrayToImplementThreeStacks() {
+		
+		
+	}
+	
+	private boolean insertInStack(int stackNumber, int number) {
+		
+		if((stackNumber < 0) || (stackNumber > 2) || (number == 0)) {
+			return false;
+		}
+		
+		if(hasSpace(stackNumber)) {
+			
+			
+			
+		}
+		
+		return false;
+	}
+	
+	private boolean hasSpace(int stackNumber) {
+		if(stackNumber==0) {
+			if((stack1Pointer >= 0) && (stack1Pointer <=9)) {
+				return true;
+			}
+		} else if(stackNumber==0) {
+			if((stack2Pointer >= 10) && (stack2Pointer <=19)) {
+				return true;
+			}
+		} else {
+			if((stack3Pointer >= 20) && (stack3Pointer <=29)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+}

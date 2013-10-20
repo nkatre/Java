@@ -1,5 +1,8 @@
 package general;
 
+import java.util.LinkedList;
+import java.util.List;
+
 interface StackInterface<T> {
 
 	public boolean push(T data);
@@ -65,6 +68,12 @@ private DoublyLinkedList<T> stack = new DoublyLinkedList<T>();
 		return stack.size();
 	}
 	
+	public boolean isEmpty() {
+		if(null == stack)
+			return true;
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		
@@ -76,6 +85,7 @@ private DoublyLinkedList<T> stack = new DoublyLinkedList<T>();
 		
 		return sb.toString();
 	}
+	
 	
 	public static void main (String[] args) {
 		Stack<String> stack = new Stack<String>(3);

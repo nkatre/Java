@@ -1,0 +1,23 @@
+package general;
+
+/*
+ * Implement a MyQueue class which implements a queue using two stacks 
+ */
+public class QueueUsingStack {
+	
+	Stack<Integer> stack1 = new Stack<Integer>();
+	Stack<Integer> stack2 = new Stack<Integer>();
+	
+	public boolean enQueue(int data) {
+		
+	}
+	
+	public boolean deQueue() {
+		
+	}
+	
+	public int peek() {
+		
+	}
+
+}
