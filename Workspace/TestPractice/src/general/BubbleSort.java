@@ -47,6 +47,7 @@ public class BubbleSort {
 		return bubbleSort(list, n);
 	}
 	
+	//VB : Implement iterative solution for this
 	
 	public static void main(String[] args) {
 		Integer[] l = {555,6,123,21,9};

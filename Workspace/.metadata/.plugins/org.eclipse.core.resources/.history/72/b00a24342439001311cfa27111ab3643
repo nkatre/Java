@@ -1,0 +1,13 @@
+package general;
+
+public class ClockHandDegree {
+	
+	int hour;
+	
+	int minute;
+	
+	public void setTime(int hour, int min) {
+		
+	}
+
+}

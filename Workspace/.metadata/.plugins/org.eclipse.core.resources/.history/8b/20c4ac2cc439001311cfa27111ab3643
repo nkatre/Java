@@ -1,0 +1,148 @@
+package general;
+
+import general.ReaderWriterLock.Lock.lockType;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+/* Write a thread safe data structure such that there could be only one writer 
+ * at a time but there could be n readers reading the data. 
+ * You can consider that incrementing or decrementing a variable is an atomic operation.
+ * If more than one threads try to write simultaneously then just select one randomly and let others wait
+ * 
+ * A readers-writer lock is like a mutex, in that it controls access to a shared resource, 
+ * allowing concurrent access to multiple threads for reading but restricting access to a single thread for writes 
+ * (or other changes) to the resource. 
+ * A common use might be to control access to a data structure in memory that can't be updated atomically and 
+ * isn't valid (and shouldn't be read by another thread) until the update is complete.
+ * 
+ */
+public class ReaderWriterLock {
+	
+	public static class Lock {
+	    enum lockType { WRITER, READER, NONE }
+		lockType type;
+		Set<String> holders;
+		Lock() {
+			super();
+			type = lockType.NONE;
+			holders = new HashSet<String>();
+		}
+		
+		public String toString() {
+			return type + ":" + holders;
+		}
+	}
+
+	Queue<String> writerQueue;
+	Queue<String> readerQueue;
+	
+	private static Lock resource;
+	boolean writerLocked;
+	boolean readerLocked;
+	
+	ReaderWriterLock() {
+		super();
+		resource = new Lock();
+		writerQueue = new Queue<String>();
+		readerQueue = new Queue<String>();
+	}
+	
+	public String toString() {
+		return "resource:" + resource + " writerQueue:" + writerQueue + " readerQueue:" + readerQueue;
+	}
+	
+	public void addWriter(String writer) {
+		writerQueue.enQueue(writer);
+	}
+	
+	public void addReader(String reader) {
+		readerQueue.enQueue(reader);
+	}
+	
+	public boolean checkWriterHold() {
+		if(resource.type.equals(Lock.lockType.WRITER)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean checkReaderHold() {
+		if(resource.type.equals(Lock.lockType.READER)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isAvailableForLocking() {
+		if(resource.type.equals(Lock.lockType.NONE)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean handOverLockToNextWriter() {
+		if ((resource.type.equals(Lock.lockType.WRITER)) 
+				&& (resource.holders.size() >= 1)) { // already held by a writer
+			return false;
+		} else if(writerQueue.size()==0) {
+			return false;
+		} 
+		
+		if(isAvailableForLocking()) {
+			String writer = writerQueue.poll();
+			resource.holders.add(writer);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean handOverLockToReaders() {
+		if ((resource.holders.size() == 0) && isAvailableForLocking()) {
+			resource.type = Lock.lockType.READER;
+			while(readerQueue.size() !=0) {
+				resource.holders.add(readerQueue.poll());
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean seekLock(Lock.lockType type, String requestor) {
+		
+		if(type.equals(Lock.lockType.READER)) {
+			if(isAvailableForLocking()) {
+				readerQueue.enQueue(requestor);
+				return handOverLockToReaders();
+			} else {
+				return false;
+			}
+		} else if(type.equals(Lock.lockType.WRITER)) {
+			if(isAvailableForLocking()) {
+				writerQueue.enQueue(requestor);
+				return handOverLockToNextWriter();
+			} else {
+				return false;
+			}
+		} else if (type.equals(Lock.lockType.NONE)) {
+			System.out.println("request for either read or write lock. the vaue passed is NONE");
+			return false;
+		}
+		
+		return false;
+	}
+
+	public static void main(String[] args) {
+		
+		ReaderWriterLock  rwl = new ReaderWriterLock();
+		System.out.println(rwl);
+		System.out.println(rwl.seekLock(lockType.READER, "requestor1"));
+		System.out.println(rwl);
+	}
+	
+
+}

@@ -1,0 +1,256 @@
+package general;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+/* Write a thread safe data structure such that there could be only one writer 
+ * at a time but there could be n readers reading the data. 
+ * You can consider that incrementing or decrementing a variable is an atomic operation.
+ * If more than one threads try to write simultaneously then just select one randomly and let others wait
+ * 
+ * A readers-writer lock is like a mutex, in that it controls access to a shared resource, 
+ * allowing concurrent access to multiple threads for reading but restricting access to a single thread for writes 
+ * (or other changes) to the resource. 
+ * A common use might be to control access to a data structure in memory that can't be updated atomically and 
+ * isn't valid (and shouldn't be read by another thread) until the update is complete.
+ * 
+ */
+public class ReaderWriterLock {
+	
+	private Queue<Writer> writerQueue;
+	private Queue<Reader> readerQueue;
+	
+	private static Lock resource;
+	private boolean locked;
+	
+	private ReaderWriterLock() {
+		super();
+		resource = new Lock();
+		writerQueue = new Queue<Writer>();
+		readerQueue = new Queue<Reader>();
+	}
+	
+	public String toString() {
+		return "resource:" + resource + " writerQueue:" + writerQueue + " readerQueue:" + readerQueue;
+	}
+	
+	public void addWriter(Writer writer) {
+		writerQueue.enQueue(writer);
+	}
+	
+	public void addReader(Reader reader) {
+		readerQueue.enQueue(reader);
+	}
+	
+	public Process.lockType checkHolderType() {
+		return resource.type;
+	}
+	
+	public boolean isAvailableForLocking() {
+		if(resource.type.equals(Process.lockType.NONE)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean handOverLockToNextProcess() {
+		if ((resource.type.equals(Process.lockType.WRITER)) 
+				&& (resource.holders.size() >= 1)) { // already held by a writer
+			return false;
+		} else if(writerQueue.size()==0) {
+			return false;
+		} 
+		
+		if(isAvailableForLocking()) {
+			Process writer = writerQueue.poll();
+			resource.holders.add(writer);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean handOverLockToReaders() {
+		if ((resource.holders.size() == 0) && isAvailableForLocking()) {
+			resource.type = Process.lockType.READER;
+			while(readerQueue.size() !=0) {
+				resource.holders.add(readerQueue.poll());
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean releaseLock(Process requestor) {
+		
+		if(requestor.getClass().equals(Writer.class)) {
+			return handOverLockToReaders();
+		} else if(requestor.getClass().equals(Reader.class)) {
+			return handOverLockToNextWriter();
+		}
+		
+		return false;
+	}
+	
+	public boolean seekLock(Process requestor) {
+		
+		if(requestor.getClass().equals(Reader.class)) {
+			readerQueue.enQueue((Reader) requestor);
+			if(isAvailableForLocking()) {
+				return handOverLockToReaders();
+			} else {
+				return false;
+			}
+		} else if(requestor.getClass().equals(Writer.class)) {
+			writerQueue.enQueue((Writer) requestor);
+			if(isAvailableForLocking()) {
+				return handOverLockToNextWriter();
+			} else {
+				return false;
+			}
+		} else {
+			System.out.println("request for either read or write lock. the vaue passed is NONE");
+			return false;
+		}
+	}
+
+	public static void main(String[] args) {
+		
+		ReaderWriterLock  rwl = new ReaderWriterLock();
+		System.out.println(rwl);
+		
+		Reader r1 = rwl.new Reader(1);
+		Writer w1 = rwl.new Writer(1);
+		
+		System.out.println(rwl.seekLock(r1));
+		System.out.println(rwl + ":::" + rwl.releaseLock(r1));
+		System.out.println(rwl + ":::" + rwl.seekLock(w1));
+	}
+
+	private static class Lock {
+	    
+	    private Process.lockType type;
+	    private Set<Process> holders;
+	    
+	    private Lock() {
+			super();
+			type = Process.lockType.NONE;
+			holders = new HashSet<Process>();
+		}
+		
+		public String toString() {
+			return type + ":" + holders;
+		}
+	}
+
+	private static interface Process{
+		int getId();
+		void setId(int id);
+		enum lockType { WRITER, READER, NONE }
+	}
+
+	private class Writer implements Process {
+		
+		private int id;
+		
+		Writer(int id) {
+			super();
+			setId(id);
+		}
+	
+		@Override
+		public int getId() {
+			return id;
+		}
+	
+		@Override
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + id;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Writer other = (Writer) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (id != other.id)
+				return false;
+			return true;
+		}
+
+		private ReaderWriterLock getOuterType() {
+			return ReaderWriterLock.this;
+		}
+
+	}
+
+	private class Reader implements Process {
+		
+		private int id;
+		
+		Reader (int id) {
+			super();
+			setId(id);
+		}
+	
+		@Override
+		public int getId() {
+			return id;
+		}
+	
+		@Override
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + id;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Reader other = (Reader) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (id != other.id)
+				return false;
+			return true;
+		}
+
+		private ReaderWriterLock getOuterType() {
+			return ReaderWriterLock.this;
+		}
+		
+	}
+	
+
+}

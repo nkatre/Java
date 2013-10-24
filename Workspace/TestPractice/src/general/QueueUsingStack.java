@@ -12,6 +12,7 @@ public class QueueUsingStack {
 		return stack1.push(data);
 	}
 	
+	// VB: This is sub-optimal solution. Think about how you can reuse the work you did for one  de-queue to another
 	public int deQueue() {
 		stack2 = new Stack<Integer>();
 		

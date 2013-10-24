@@ -23,6 +23,7 @@ public class InsertionSort<T> implements Comparable{
 			
 			for(int j = (i-1); j >=0; j--) {
 				if(((Comparable) key).compareTo(array[j]) < 0) {
+					//VB : Why cant you also move here. This would avoid double iteration
 					position = j;
 				}
 			}
@@ -60,7 +61,7 @@ public class InsertionSort<T> implements Comparable{
 	
 	public static void main(String[] args) {
 		Double[] array = {9.84, 12.0, 1.234};
-		InsertionSort iSort = new InsertionSort<Double>(array);
+		InsertionSort iSort = new InsertionSort<Double>(array); //VB: Should be  InsertionSort<Double> iSort
 		iSort.sort();
 		System.out.println(iSort);
 	}

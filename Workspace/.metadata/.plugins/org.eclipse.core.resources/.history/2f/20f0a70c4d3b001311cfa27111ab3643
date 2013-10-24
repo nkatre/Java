@@ -1,0 +1,38 @@
+package general;
+
+import java.util.List;
+
+//VB: Implement this
+public class Deadlock {
+	
+	
+	
+	private class Process {
+		private int id;
+		List<Resource> resourceHeld;
+		List<Resource> resourceWaitingFor;
+		
+	}
+	
+	private class Resource {
+		private int id;
+		private boolean isUsed;
+		
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public boolean isUsed() {
+			return isUsed;
+		}
+		public void setUsed(boolean isUsed) {
+			this.isUsed = isUsed;
+		}
+		
+		
+		
+	}
+
+}

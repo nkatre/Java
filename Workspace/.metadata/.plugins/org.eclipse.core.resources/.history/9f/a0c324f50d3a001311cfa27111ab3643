@@ -1,0 +1,27 @@
+package general;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Graph {
+	
+	private static class Node {
+		
+	}
+	
+	
+	private static class Edge<T> {
+		Node fromNode;
+		Node toNode;
+		Map <String, Object> edgeProperties;
+		
+		Edge (Node fromNode, Node toNode) {
+			super();
+			this.fromNode = fromNode;
+			this.toNode = toNode;
+			edgeProperties = new HashMap<String, Object>();
+		}
+	}
+	
+	
+}

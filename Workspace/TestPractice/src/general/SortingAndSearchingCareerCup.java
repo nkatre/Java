@@ -24,6 +24,8 @@ public class SortingAndSearchingCareerCup {
 			}
 		}
 		
+		// VB: THis seems wrong. It is a O(n)  operation to merge 2 sorted arrays
+		// Why is this overly complicate. Please check
 		for(int i=0; i<b.length; i++) {
 			int p = -1;
 			for(int j=0; j<size; j++) {
@@ -59,6 +61,9 @@ public class SortingAndSearchingCareerCup {
 	 */
 	public void sortStringPlacingAnagramsNearby(String[] slist) {
 		
+		//VB : What you should do is implement a comparator<String> interface. The comparator method should
+		//VB : first sort the characters for each of the arguments and call compareTo on strings. You should then use
+		//VB : the comparator for sorting
 		ArrayAndStringCareerCup<String> a = new ArrayAndStringCareerCup<String>();
 		
 		List<String> list = new LinkedList<String>();
@@ -295,7 +300,7 @@ public class SortingAndSearchingCareerCup {
 	 * 			(56, 90) (60,95) (65,100) (68,110) (70,150) (75,190)
 	 */
 	// thinking of implementing radix sort
-	class Person implements Comparable{
+	class Person implements Comparable{   //VB : You should use Comparable<Person>
 		int height;
 		int weight;
 		
@@ -338,7 +343,8 @@ public class SortingAndSearchingCareerCup {
 		for(Person p : persons) {
 			Iterator<Person> it = list.iterator();
 			int index = 0;
-			while(it.hasNext()) {
+			//VB: I think the logic is wrong or I dont understand, where do you remove() ?  Can you use in-place sorting here
+			while(it.hasNext()) { //VB: Use for ( int i = 0 ; i <....) that will be better.
 				Person per = (Person) it.next();
 				if(p.compareTo(per) <= 0) {
 					break;

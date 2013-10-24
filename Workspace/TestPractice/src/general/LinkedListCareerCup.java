@@ -14,9 +14,11 @@ public class LinkedListCareerCup {
 	
 	class LList {
 		
+		//VB : Same issue in the definition
 		Node head;
 		Node tail;
 	
+		//VB : Static ?
 		class Node {
 			Integer data;
 			Node next;
@@ -97,7 +99,7 @@ public class LinkedListCareerCup {
 				
 				if(i2.equals(integer)) {
 					iterator.remove();
-					break;
+					break;      //VB   : what if there are more duplicates here. You should not break
 				}
 			}
 			iterator.next();
@@ -113,6 +115,8 @@ public class LinkedListCareerCup {
 		if((null==list) || (list.isEmpty()))
 			return null;
 		
+		//VB : The usual interview question is you should not use size(). There may not be guarantee that size() is O(1)
+		//VB : You should use 2 ptrs for this
 		int size = list.size();
 		
 		if((n > size) || (n <0))
@@ -159,9 +163,9 @@ public class LinkedListCareerCup {
 			System.out.println("2:");
 			if(n.data == c.data) {
 				System.out.println("3:");
-				nP.next = c.next;
-				c.data = null;
-				c.next = null;
+				nP.next = c.next; //VB, it should be nP.next = n.next
+				c.data = null; //n.data = null 
+				c.next = null; //n.next = null
 				return;
 			}
 			nP = n;
@@ -226,6 +230,12 @@ public class LinkedListCareerCup {
 		Set<LList.Node> set = new HashSet<LList.Node>();
 		LList.Node n = list.head;
 		
+		//VB : There could be a catch here. You are using a set which uses equals() method to find duplicates.
+		// VB : What if the LList.Node.equals() method is overloaded to  compare only data. In that case 2 node which 
+		// VB : which has the same data will return true. To solve this, you can have your own wrapper class like 
+		// VB : NodeWrapper(containing LList.Node) and in its equals() method, you can just compare the references 
+		// VB : this.LList.Node == other.LList.Node. Remembr : Do this only if the interviewer prompts you about this
+		// VB : 
 		while(null != n) {
 			if(set.contains(n)) {
 				return n;

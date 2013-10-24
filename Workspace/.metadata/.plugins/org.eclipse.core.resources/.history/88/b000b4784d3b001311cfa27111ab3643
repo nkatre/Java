@@ -1,0 +1,54 @@
+package general;
+
+import java.util.List;
+import java.util.LinkedList;
+
+public class Deadlock {
+	
+
+	private class Process {
+		private int id;
+		List<Resource> resourceHeld = new LinkedList<Resource>();
+		List<Resource> resourceWaitingFor = new LinkedList<Resource>();
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public List<Resource> getResourceHeld() {
+			return resourceHeld;
+		}
+		public void setResourceHeld(List<Resource> resourceHeld) {
+			this.resourceHeld = resourceHeld;
+		}
+		public List<Resource> getResourceWaitingFor() {
+			return resourceWaitingFor;
+		}
+		public void setResourceWaitingFor(List<Resource> resourceWaitingFor) {
+			this.resourceWaitingFor = resourceWaitingFor;
+		}
+	}
+	
+	private class Resource {
+		private int id;
+		private boolean isUsed;
+		
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public boolean isUsed() {
+			return isUsed;
+		}
+		public void setUsed(boolean isUsed) {
+			this.isUsed = isUsed;
+		}
+		
+		
+		
+	}
+
+}

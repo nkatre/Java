@@ -197,6 +197,8 @@ public class ModerateCareerCup {
 		Output: 5 (i e , {3, -2, 4} )
 	 */
 	
+	//VB : THere is a solution to do better than O(n^2). 
+	//VB : Please google for Maximum Sub-sequence sum. THis is very common question
 	public void findLargestSumInSubSequence(int[] a) {
 		int max = Integer.MIN_VALUE;
 		int sum = 0;
@@ -221,6 +223,9 @@ public class ModerateCareerCup {
 	 * Design a method to find the frequency of occurrences of any given word in a book 
 	 */
 	public int frequency(String book, String word) {
+		//VB : I you want to fin frequency of only one word, Why build a map
+		//VB : If you have to do this for many words, you can implement a class
+		//VB : that first builds the map and has an API to return frequency in O(1) time
 		String[] words = book.split(" ");
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for(int i=0; i<words.length; i++) {
@@ -247,6 +252,7 @@ public class ModerateCareerCup {
 		if((x+y) <=7)
 			return x+y;
 		
+		//VB :This solution will not give equal probability for all numbers betwen  1-7. Please google
 		if((Math.abs(x-y) > 0) && (Math.abs(x-y) <=7)) {
 			return Math.abs(x-y);
 		}
@@ -254,6 +260,7 @@ public class ModerateCareerCup {
 		return x;
 	}
 	
+	//VB :This solution will not give equal probability for all numbers betwen  1-5. Please google
 	private int rand5() {
 		int r = (int) Math.round(Math.random()*10);
 		if(r == 0) {
@@ -271,7 +278,7 @@ public class ModerateCareerCup {
 	 */
 	public void findPairsThatSumToGivenNumber(int[] a, int n) {
 		
-		Map<Integer, Integer> map = new ConcurrentHashMap<Integer, Integer>();
+		Map<Integer, Integer> map = new ConcurrentHashMap<Integer, Integer>(); //VB : Why concurrent Hash Map ?
 		
 		for(int i=0; i<a.length; i++) {			
 			if(map.get(a[i]) != null) {

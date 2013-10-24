@@ -1,0 +1,26 @@
+package general;
+
+public class ClockHandDegree {
+	
+	int hour;
+	
+	int minute;
+	
+	static final double hourDegreePerMinute = 360.0/(60*12.0);
+	
+	static final double minuteDegreePerMinute = 360.0/(60);
+	
+	public void setTime(int hour, int min) {
+		this.hour = hour;
+		this.minute = min;
+	}
+	
+	public static void main(String[] args) {
+		
+		ClockHandDegree clock = new ClockHandDegree();
+		System.out.println(clock.hourDegreePerMinute);
+		System.out.println(clock.minuteDegreePerMinute);
+	}
+	
+
+}

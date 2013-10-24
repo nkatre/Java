@@ -1,0 +1,22 @@
+package general;
+
+public class Graph {
+	
+	private static class Node {
+		
+	}
+	
+	
+	private static class Edge {
+		Node fromNode;
+		Node toNode;
+		
+		Edge (Node fromNode, Node toNode) {
+			super();
+			this.fromNode = fromNode;
+			this.toNode = toNode;
+		}
+	}
+	
+	
+}

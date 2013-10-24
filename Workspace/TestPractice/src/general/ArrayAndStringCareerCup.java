@@ -58,6 +58,7 @@ public class ArrayAndStringCareerCup<T> {
 	 * FOLLOW UP
 	 * Write the test cases for this method 
 	 */
+	// VB : The below 2 testcases do not work     ssfsassssss
 	public String removeDuplicateCharacters(String s) {
 		if(null ==s)
 			return null;
@@ -68,7 +69,9 @@ public class ArrayAndStringCareerCup<T> {
 		for(int i=0; i< s.length(); i++) {
 			for (int j = (i+1); j <s.length(); j++) {
 				if(s.charAt(i)==s.charAt(j)) {
-					s = s.substring(0, (j)) + s.substring(j+1, s.length());
+					System.out.println(s.substring(0, (j))+ " + " +   s.substring(j+1, s.length())   );
+					s = s.substring(0,j) + s.substring(j+1, s.length());		
+					j--;
 				}
 			}
 		}
@@ -113,7 +116,10 @@ public class ArrayAndStringCareerCup<T> {
 				} else {
 					map.remove(c2[i]);
 				}
-			} 
+			} else {
+				return false;
+			}
+			//FIXED - //VB : What if map does not contain the character. Shouldnt you return false? 
 		}
 		
 		if (map.isEmpty()) {
@@ -143,12 +149,51 @@ public class ArrayAndStringCareerCup<T> {
 		return s;
 	}
 	
+	public String fillSpaces1(String s) { // using arrays
+		
+		if(null==s || s.isEmpty())
+			return s;
+
+		char[] c = s.toCharArray();
+		
+		int x = 0;
+		for(int i=0; i<c.length; i++) {
+			if(c[i] == ' ') {
+				x++;
+			}
+		}
+		if(x>0) {
+			char[] cNew = new char[c.length + (x*3)];
+			int cNewPointer = cNew.length-1;
+			for(int i= (c.length-1); i>=0; i-- ) {
+				if(c[i] == ' ') {
+					cNew[cNewPointer] = '0';
+					cNewPointer--;
+					cNew[cNewPointer] = '2';
+					cNewPointer--;
+					cNew[cNewPointer] = '%';
+					cNewPointer--;
+				} else {
+					cNew[cNewPointer] = c[i];
+					cNewPointer--;
+				}
+			}
+			StringBuilder sb = new StringBuilder();
+			for(int i= 0; i<cNew.length; i++) {
+				sb.append(cNew[i]);
+			}
+			s = sb.toString();
+		}
+		return s;
+	}
+	
 	/*
 	 * Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, 
 	 * write a method to rotate the image by 90 degrees Can you do this in place?
 	 */
 	
 	// TODO this is wrong answer
+	//VB : Verify if there is a correct answer 
 	public Integer[][] rotateBy90Degree(Integer[][] data, int matrixSize) {
 		if(null==data)
 			return null;
@@ -193,8 +238,9 @@ public class ArrayAndStringCareerCup<T> {
 		if(s1.length() != s2.length())
 			return false;
 		
-		if(areAnagrams(s1, s2)) {
+		if(areAnagrams(s1, s2)) {      //VB You should not use areAnagrams for this question
 			
+			// VB : this will fail or abcad, adabc
 			int start = s2.indexOf(s1.charAt(0));
 			String sub1 = s2.substring(start);
 			String sub2 = s2.substring(0, start);
@@ -205,6 +251,26 @@ public class ArrayAndStringCareerCup<T> {
 			
 		} else {
 			return false;
+		}
+		
+		return false;
+	}
+	
+	public boolean isRotation1(String s1, String s2) {
+		
+		if((null == s1) || (null == s2))
+			return false;
+		
+		if(s1.length() != s2.length())
+			return false;
+		
+		int i = s2.indexOf(s1.charAt(0));
+		
+		System.out.println(s2.substring(0,i) + ":" + s2.substring(i));
+
+		//("waterbottle","erbottlewat")
+		if((isSubstring(s2.substring(i), s1) ) && (isSubstring(s2.substring(0,i), s1) )) {
+			return true;
 		}
 		
 		return false;
@@ -253,8 +319,12 @@ public class ArrayAndStringCareerCup<T> {
 		return false;
 	}
 	
-	
 	public static void main(String[] args) {
+		ArrayAndStringCareerCup a = new ArrayAndStringCareerCup();
+		System.out.println(a.isRotation1("waterbotlle","erbottlewat"));
+	}
+	
+	public static void main1(String[] args) {
 		
 		ArrayAndStringCareerCup a = new ArrayAndStringCareerCup();
 		
@@ -269,6 +339,11 @@ public class ArrayAndStringCareerCup<T> {
 		Assert.assertNull(a.removeDuplicateCharacters(null));
 		Assert.assertEquals("", a.removeDuplicateCharacters(""));
 		
+		System.out.println("..." + a.removeDuplicateCharacters("sssssss"));
+		// VB : The below 2 testcases do not work
+		Assert.assertEquals("s", a.removeDuplicateCharacters("sssssss"));
+		Assert.assertEquals("string", a.removeDuplicateCharacters("sttriingssssss"));
+
 		Assert.assertTrue(a.areAnagrams("dormitory", "dirtyroom"));	
 		Assert.assertFalse(a.areAnagrams("dorm", "dirtyroom"));
 		

@@ -30,6 +30,7 @@ public class TicTacToe {
 		}
 	}
 	
+	//VB : How o you determine winner?
 	TicTacToe(int size) {
 		board = new char[size][size];
 		this.size = size;

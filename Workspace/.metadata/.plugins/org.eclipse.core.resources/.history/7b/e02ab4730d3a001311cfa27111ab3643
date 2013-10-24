@@ -1,0 +1,15 @@
+package general;
+
+public class Graph {
+	
+	private static class Node {
+		
+	}
+	
+	
+	private static class Edge {
+		
+	}
+	
+	
+}

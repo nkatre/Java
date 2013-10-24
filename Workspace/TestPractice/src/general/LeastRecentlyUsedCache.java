@@ -7,10 +7,13 @@ import java.util.Map;
 
 public class LeastRecentlyUsedCache {
 	
-	int cacheSize = 5;
+	//VB:  You need to have these member variables marked as private
+	int cacheSize = 5; // VB: This can be taken as a constructor argument
 	
+	//VB : You should use your own implementation of LinkedList in order to guarantee quick removal and access
 	List<Node> list = new LinkedList<Node>();
 	
+	//VB: This is WRONG. Map should be Map<String,LinkedListNode>. Otherwise you cannot guarantee O(1) getValue()
 	Map<String, String> map = new HashMap<String, String>();
 	
 	public String listToString() {
@@ -24,6 +27,7 @@ public class LeastRecentlyUsedCache {
 		return sb.toString();
 	}
 	
+	//VB: Why is this not private static
 	class Node {
 		String data;
 		String key;
@@ -94,6 +98,7 @@ public class LeastRecentlyUsedCache {
 	}
 	
 	// use case 3
+	// VB: This is not O(1). WRONG.  
 	public String getValue(String key){
 		
 		if(list.isEmpty())

@@ -1,0 +1,544 @@
+package general;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Deadlock {
+	
+	private List<Process> processPool = new LinkedList<Process>();
+	private List<Resource> resourcePool = new LinkedList<Resource>();
+	private Set<Resource> resourceAvailablePool = new HashSet<Resource>();
+
+	public boolean allocateResource(Process process, Resource resource) {
+		if (isProcessInPool(process.getId()) && isResourceInPool(resource)) {
+			if(isResourceInAvailablePool(resource)) {
+				process.addResourceHeld(resource); 
+				return true;
+			} else {
+				process.addResourceWaitingFor(resource);
+				return false;
+			}
+		}
+		return false;
+	}
+
+	public boolean releaseResourceHeld(Process process, Resource resource) {
+		if(isResourceInPool(resource))  {
+			if(process.getResourceHeld().contains(resource)) {
+				process.getResourceHeld().remove(resource);
+				resource.setUsed(false);
+				resourceAvailablePool.add(resource);
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	
+	public boolean deadlockOccurred() {
+		
+		for(int i=0; i<processPool.size(); i++) {
+			List<Resource> rWaiting = processPool.get(i).getResourceWaitingFor();
+			if (null == rWaiting) {
+				continue;
+			} else {
+				for(int j=0; j<rWaiting.size(); j++) {
+					Resource r = rWaiting.get(j);
+					Process p = r.getHeldBy();
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean deadlockOccurred1() {
+		
+		Iterator<Process> iterator = processPool.iterator();
+		
+		while(iterator.hasNext()) {
+			
+			Process p = iterator.next();
+			Iterator<Process> itr = processPool.iterator();
+			
+			while(itr.hasNext()) {
+				Process pI = itr.next();
+				if(pI == p) {
+					continue;
+				} else {
+					List<Resource> pResourceHeld = p.getResourceHeld();
+					Iterator<Resource> rIitr = pI.getResourceWaitingFor().iterator();
+					
+					while(rIitr.hasNext()) {
+						Resource r = rIitr.next();
+						
+						if(pResourceHeld.contains(r)) {
+							List<Resource> pIResourceHeld = pI.getResourceHeld();
+							Iterator<Resource> ritr = p.getResourceWaitingFor().iterator();
+							
+							while(ritr.hasNext()) {
+								Resource rI = ritr.next();
+								
+								if(pIResourceHeld.contains(rI)) {
+									System.out.println("Process:" + p.getId() + " holds Resource:" + r.getId()
+											+ " and waiting for Resource:" + rI.getId() + " to be released by " + pI.getId());
+									System.out.println("Process:" + pI.getId() + " holds Resource:" + rI.getId()
+											+ " and waiting for Resource:" + r.getId() + " to be released by " + p.getId());
+									
+									
+									return true;
+								}
+							}
+						}
+					}
+					
+				}
+			}
+			
+		}
+		
+		return false;
+	}
+
+	public boolean addResourceToPool(Resource resource) {
+		if(isResourceInPool(resource))
+			return false;
+		this.resourcePool.add(resource);
+		this.resourceAvailablePool.add(resource);
+		return true;
+	}
+	
+	public boolean addProcessToPool(Process process) {
+		if(isProcessInPool(process.getId()))
+			return false;
+		this.processPool.add(process);
+		return true;
+	}
+	
+	public boolean addResourceInAvailablePool(Resource resource) {
+		if(isResourceInAvailablePool(resource))
+			return false;
+		this.resourcePool.add(resource);
+		return true;
+	}
+
+	
+
+	/*public void setResourceAvailablePool(Set<Resource> resourceAvailablePool) {
+		this.resourceAvailablePool = resourceAvailablePool;
+	}
+
+	public void setResourcePool(List<Resource> resourcePool) {
+		this.resourcePool = resourcePool;
+	}*/
+
+	public List<Process> getProcessPool() {
+		return processPool;
+	}
+
+	public List<Resource> getResourcePool() {
+		return resourcePool;
+	}
+
+	public Set<Resource> getResourceAvailablePool() {
+		return resourceAvailablePool;
+	}
+
+	private boolean isResourceInAvailablePool(Resource resource) {
+		Iterator<Resource> iterator = getResourceAvailablePool().iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next() == resource) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isResourceInPool(Resource resource) {
+		Iterator<Resource> iterator = getResourcePool().iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next() == resource) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isProcessInPool(int processId) {
+		Iterator<Process> iterator = getProcessPool().iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getId() == processId) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		Deadlock d = new Deadlock();
+		Process p1 = d.new Process(1);
+		Process p2 = d.new Process(2);
+		Process p3 = d.new Process(3);
+		Process p4 = d.new Process(4);
+		Process p5 = d.new Process(5);
+		
+		Resource r1 = d.new Resource(1);
+		Resource r2 = d.new Resource(2);
+		Resource r3 = d.new Resource(3);
+		
+		d.addProcessToPool(p1);
+		d.addProcessToPool(p2);
+		d.addProcessToPool(p3);
+		d.addProcessToPool(p4);
+		d.addProcessToPool(p5);
+	
+		d.addResourceToPool(r1);
+		d.addResourceToPool(r2);
+		d.addResourceToPool(r3);
+		
+		d.allocateResource(p1, r1);
+		d.allocateResource(p2, r2);
+		d.allocateResource(p3, r3);
+		d.allocateResource(p1, r2);
+		d.allocateResource(p2, r3);
+		d.allocateResource(p3, r1);
+		
+		p1.execute();
+		p2.execute();
+		p3.execute();
+	
+		//System.out.println("Deadlock occured: " + d.deadlockOccurred());
+		
+		System.out.println(d.resourceAvailablePool);
+		System.out.println(d.processPool);
+		
+	}
+
+	private class Process {
+		private int id;
+		private List<Resource> resourceHeld = new LinkedList<Resource>();
+		private List<Resource> resourceWaitingFor = new LinkedList<Resource>();
+		private boolean completed;
+		
+		private Process(int id) {
+			this.id = id;
+		}
+		
+		public boolean addResourceHeld(Resource resource) {
+			if(isResourceInPool(resource)) {
+				
+				if(resourceHeld.contains(resource)) {
+					return false;
+				}
+				resource.setHeldBy(this);
+				resourceHeld.add(resource);
+				resource.setUsed(true);
+				resourceAvailablePool.remove(resource);
+				
+				return true;
+			}
+			return false;
+		}
+		
+		public boolean isCompleted() {
+			return completed;
+		}
+
+		private void setCompleted(boolean completed) {
+			this.completed = completed;
+			if (completed == true) {
+				List<Resource> resources = getResourceHeld();
+				for(int i=0; i<resources.size(); i++) {
+					Resource r = resources.get(i);
+					resourceAvailablePool.add(r);
+				}
+				processPool.remove(this);
+				setResourceHeld(null);
+				setResourceWaitingFor(null);
+			}
+		}
+
+		public boolean addResourceWaitingFor(Resource resource) {
+			if(isResourceInPool(resource)) {
+				if(resourceWaitingFor.contains(resource)) {
+					return false;
+				}
+				resourceWaitingFor.add(resource);
+				return true;
+			}
+			return false;
+		}
+		
+		public int getId() {
+			return id;
+		}
+		
+		public void setId(int id) {
+			this.id = id;
+		}
+		
+		public List<Resource> getResourceHeld() {
+			return resourceHeld;
+		}
+		
+		public void setResourceHeld(List<Resource> resourceHeld) {
+			this.resourceHeld = resourceHeld;
+		}
+		
+		public List<Resource> getResourceWaitingFor() {
+			return resourceWaitingFor;
+		}
+		public void setResourceWaitingFor(List<Resource> resourceWaitingFor) {
+			this.resourceWaitingFor = resourceWaitingFor;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + id;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Process other = (Process) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (id != other.id)
+				return false;
+			return true;
+		}
+
+		private Deadlock getOuterType() {
+			return Deadlock.this;
+		}
+
+		@Override
+		public String toString() {
+			return "Process [id=" + id + ", resourceHeld=" + resourceHeld
+					+ ", resourceWaitingFor=" + resourceWaitingFor + "]";
+		}
+		
+		public boolean execute() throws Exception {
+			if (resourceWaitingFor.isEmpty()) {
+				for(int i=0; i<resourceHeld.size(); i++) {
+					Resource r = resourceHeld.get(i);
+					System.out.println("Process:" + id + " finished using Resource:" + r.getId());
+					r.setHeldBy(null);
+					r.setUsed(false);
+					releaseResourceHeld(this, r);
+					i--;
+				}
+				setCompleted(true);
+				System.out.println("Process:" + id + " executed...");
+				return true;
+			} else {
+				if(deadlockOccurred1()) {
+					throw new Exception("Deadlock occurred");
+				}
+				
+				for(int i=0; i<resourceWaitingFor.size(); i++) {
+					Resource r = resourceWaitingFor.get(i);
+					if(isResourceInAvailablePool(r)){
+						this.addResourceHeld(r);
+						resourceWaitingFor.remove(r);
+						System.out.println("Process:" + id + " finished using Resource:" + r.getId());
+						r.setHeldBy(null);
+						r.setUsed(false);
+						releaseResourceHeld(this, r);
+					} else {
+						System.out.println("Process" + id + " waiting for Resource:" + r.getId() + " to be released for use");
+						System.out.println("Process:" + id + " did not complete execution...");
+						return false;
+					}
+				}
+				setCompleted(true);
+				System.out.println("Process:" + id + " executed...");
+				return true;
+			}
+			
+		}
+		
+	}
+	
+	private class Resource {
+		private int id;
+		private boolean isUsed;
+		private Process heldBy;
+		
+		Resource(int id) {
+			this.id = id;
+		}
+		
+		public Process getHeldBy() {
+			return heldBy;
+		}
+
+		public void setHeldBy(Process heldBy) {
+			this.heldBy = heldBy;
+		}
+
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public boolean isUsed() {
+			return isUsed;
+		}
+		public void setUsed(boolean isUsed) {
+			this.isUsed = isUsed;
+		}
+		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + id;
+			return result;
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Resource other = (Resource) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (id != other.id)
+				return false;
+			return true;
+		}
+		
+		private Deadlock getOuterType() {
+			return Deadlock.this;
+		}
+
+		
+		@Override
+		public String toString() {
+			return "Resource [id=" + id + ", isUsed=" + isUsed + "]";
+		}
+
+	}
+	
+	private class NodeList {
+		private Node head;
+		private Node tail;
+		
+		public boolean addNode(Process p) {
+			
+			Node n = new Node(p);
+			
+			List<Resource> resources = p.getResourceHeld();
+			
+			if(null==head) {
+				head= tail = n;
+				return true;
+			} else {
+				Node node = head;
+				
+				while(null != node) {
+					if(node == n) {
+						return false;
+					}
+					node = node.next;
+				}
+				
+				tail.next = n;
+				tail = tail.next;
+				return true;
+			}
+		}
+	
+		public Node getHead() {
+			return head;
+		}
+	}
+	
+	private class Node {
+		private Process process;
+		private List<Node> pointTo = new LinkedList<Node>();
+		private boolean visited;
+		private Node(Process p) {
+			process = p;
+		}
+		public Process getProcess() {
+			return process;
+		}
+		public void setProcess(Process process) {
+			this.process = process;
+		}
+		public List<Node> getNext() {
+			return pointTo;
+		}
+		public void setNext(List<Node> pointTo) {
+			this.pointTo = pointTo;
+		}
+		public void addPointTo(Node n) {
+			pointTo.add(n);
+		}
+		public boolean isVisited() {
+			return visited;
+		}
+		public void setVisited(boolean visited) {
+			this.visited = visited;
+		}
+		@Override
+		public String toString() {
+			return "Node [process=" + process + ", visited="
+					+ visited + "]";
+		}
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result
+					+ ((process == null) ? 0 : process.hashCode());
+			return result;
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Node other = (Node) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (process == null) {
+				if (other.process != null)
+					return false;
+			} else if (!process.equals(other.process))
+				return false;
+			return true;
+		}
+		private Deadlock getOuterType() {
+			return Deadlock.this;
+		}
+		
+		
+	}
+
+}

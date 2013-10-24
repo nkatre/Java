@@ -56,7 +56,8 @@ public class MergeSort<T> implements Comparable {
 			k++;
 			i++;
 		}
-		
+
+		//VB : Where is the  case for while (j <= end) ?
 	}
 
 	@Override
@@ -100,9 +101,6 @@ public class MergeSort<T> implements Comparable {
 		MergeSort<Integer> mSort = new MergeSort<Integer>(array);
 		mSort.sort();
 		System.out.println(mSort);
-		
-		
-		
 	}
 
 }

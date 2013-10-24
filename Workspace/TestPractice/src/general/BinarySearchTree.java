@@ -7,7 +7,8 @@ import junit.framework.Assert;
 
 public class BinarySearchTree implements Cloneable{
 	
-	Node root;   // Comment : Using private/public/protected and dont use default unless necessary. Make sure Encapsulation is correct
+	Node root;   // Comment : Using private/public/protected and dont use default unless necessary. 
+					//Make sure Encapsulation is correct
 	
 	boolean allowDuplicateValues = false;  // Same here
 	
@@ -130,9 +131,10 @@ public class BinarySearchTree implements Cloneable{
 
 	}
 	
-	public Integer getLeastCommonAncestoru(Integer data1, Integer data2)
+	//VB: implement this
+	public Integer getLeastCommonAncestor(Integer data1, Integer data2)
 	{
-		
+		return null;
 	}
 	
 	
@@ -146,7 +148,8 @@ public class BinarySearchTree implements Cloneable{
 	 */ 
 	public static BinarySearchTree deserializeBinarySearchTree(List<Integer> preOrderTraversal)
 	{
-		
+		// VB : Implement this
+		return null;
 	}
 	
 	/**
@@ -157,9 +160,10 @@ public class BinarySearchTree implements Cloneable{
 	 *              1. Preorder and Inorder traversal
 	 *              2. PostOrder and Inorder traversal
 	 */ 
-	public static List serializeBinarySearchTree(BinarySearchTree searchTree)
+	public static List<Integer> serializeBinarySearchTree(BinarySearchTree searchTree)
 	{
-		
+		//VB : Implement this
+		return null;
 	}
 	
 	
@@ -424,7 +428,8 @@ public class BinarySearchTree implements Cloneable{
 		
 		Node current = node;
 		
-		// Comment: The below if-else is unnecessarily complex. The last part ("else") alone is needed. You can do the null check there
+		// Comment: The below if-else is unnecessarily complex. The last part ("else") alone is needed. 
+		//You can do the null check there
 		// Also, the other variant is you can pass the list object to recursive calls to avoid addAll
 		// Usually, they will ask you to print the traversal. You would need to carefully listen to the question 
 		//base case

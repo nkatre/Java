@@ -1,0 +1,101 @@
+package general;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+/* Write a thread safe data structure such that there could be only one writer 
+ * at a time but there could be n readers reading the data. 
+ * You can consider that incrementing or decrementing a variable is an atomic operation.
+ * If more than one threads try to write simultaneously then just select one randomly and let others wait
+ * 
+ * A readers-writer lock is like a mutex, in that it controls access to a shared resource, 
+ * allowing concurrent access to multiple threads for reading but restricting access to a single thread for writes 
+ * (or other changes) to the resource. 
+ * A common use might be to control access to a data structure in memory that can't be updated atomically and 
+ * isn't valid (and shouldn't be read by another thread) until the update is complete.
+ * 
+ */
+public class ReaderWriterLock {
+	
+	Queue<String> writerQueue = new Queue<String>();
+	Queue<String> readerQueue = new Queue<String>();
+	
+	private static Lock resource;
+	boolean writerLocked;
+	boolean readerLocked;
+	
+	enum lockType { WRITER, READER, NONE };
+	
+	public void addWriter(String writer) {
+		writerQueue.enQueue(writer);
+	}
+	
+	public void addReader(String reader) {
+		readerQueue.enQueue(reader);
+	}
+	
+	public boolean checkWriterHold() {
+		if(resource.type.equals(lockType.WRITER)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean checkReaderHold() {
+		if(resource.type.equals(lockType.READER)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isAvailableForLocking() {
+		if(resource.type.equals(lockType.NONE)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean handOverLockToNextWriter() {
+		if ((resource.type.equals(lockType.WRITER)) 
+				&& (resource.holders.size() >= 1)) { // already held by a writer
+			return false;
+		} else if(writerQueue.size()==0) {
+			return false;
+		} 
+		
+		if(isAvailableForLocking()) {
+			String writer = writerQueue.poll();
+			resource.holders.add(writer);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean handOverLockToReaders() {
+		if ((resource.holders.size() == 0) && isAvailableForLocking()) {
+			resource.type = lockType.READER;
+			while(readerQueue.size() !=0) {
+				resource.holders.add(readerQueue.poll());
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean seekLock(lockType type, String requestor) {
+		
+		
+		
+		return false;
+	}
+
+	public class Lock {
+		lockType type;
+		Set<String> holders;
+	}
+	
+
+}
