@@ -1,0 +1,51 @@
+package redo;
+
+public class PractiseAtomicVariableUpdate {
+	
+	private static int number;
+	
+	public static void main(String[] s) {
+		MyR r = new  MyR(number);
+		
+  		Thread t1 = new Thread(r);
+  		Thread t2 = new Thread(r);
+  		
+  		t1.start();
+  		t2.start();
+  		try {
+			t1.join();
+			t2.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+  		
+  		//System.out.println(Thread.currentThread().getName() + " " + number);
+	}
+	
+	private static class MyR implements Runnable {
+		private static Integer num;
+		
+		public MyR(int n) {
+			num = n;
+		}
+		
+		public void run() {
+			try {
+				num.notify();
+				Thread.sleep( (long) ((10000 * Math.random())/10));
+				num.wait();
+				//synchronized(num)  {
+				//num.notify();	
+				//}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			for (int i=0; i<5; i++) {
+				num = num+1;
+				System.out.println(Thread.currentThread().getName() + " " + num);
+			}
+			//System.out.println(Thread.currentThread().getName() + " " + num);
+		}
+	}
+
+}

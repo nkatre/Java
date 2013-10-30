@@ -1,0 +1,16 @@
+package thread;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class BlockingQueue {
+
+	private int size;
+	
+	private List list = new LinkedList();
+	
+	public BlockingQueue(int size) {
+		this.size = size;
+	}
+	
+}

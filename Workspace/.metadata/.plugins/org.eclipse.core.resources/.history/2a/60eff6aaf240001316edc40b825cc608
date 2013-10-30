@@ -1,0 +1,249 @@
+package redo;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.Set;
+
+/**
+ * Secret Decoded
+ * Your task is to decode messages that were encoded with substitution ciphers. 
+ * In a substitution cipher, all occurrences of a character are replaced by a different character. 
+ * For example, in a cipher that replaces "a" with "d" and "b" with "e", the message "abb" is encoded as "dee".
+ * The exact character mappings that are used in the substitution ciphers will not be known to you. 
+ * However, the dictionary of words that were used will be given. 
+ * You will be given multiple encoded messages to decode (one per line) and they may use different substitution ciphers. 
+ * The same substitution cipher is used on all of the words in a particular message.
+ * For each scrambled message in the input, your program should output a line with the input line, 
+ * followed by the string " = " (without the quotes), followed by the decoded message.
+ * 
+ * NOTE: All inputs are from stdin and output to stdout. 
+ * The input will be exactly like how it's given in the problem and
+ * your output should exactly match the given example output
+ * 
+ * Example:
+ * input file:
+ * //dict hello there yello thorns //secret 12334 51272 12334 514678
+ * output: 
+ * 12334 51272 = hello there 12334 514678 = hello thorns
+ * 
+ * 
+test case 1:
+//dict
+hello
+there
+yello
+thorns
+//secret
+12334 51272
+12334 514678
+
+test case 2:
+//dict
+hello
+there
+yello
+bob
+tom
+mabel
+says
+hi
+secret
+the
+is
+to
+smile
+//secret
+45161 01223
+x2x 3453 6k
+x8z yz67zx 5y x4 y352z
+
+Output:
+45161 01223 = there yello
+x2x 3453 6k = bob says hi
+x8z yz67zx 5y x4 y352z = the secret is to smile
+ */
+public class SubstitutionCypher {
+	
+	public static void main(String[] args) {
+		List<Word> list = new LinkedList<Word>();
+    	List<String> nlist = new LinkedList<String>();
+    	
+    	Scanner scanner = new Scanner(System.in);
+    	boolean dict = false;
+    	boolean secret = false;
+        
+    	while(scanner.hasNextLine()) {
+        	
+        	String line = scanner.nextLine();  
+
+        	if(line.isEmpty()) {
+                break;
+            }
+        	
+        	if(line.contains("//dict")) {
+        		dict = true;
+        		continue;
+        	}
+        	if(dict && !secret) {
+        		if(!line.contains("//secret"))
+        			list.add(new Word(line));
+        	}
+        	if(line.contains("//secret")) {
+        		secret= true;
+        		dict=false;
+        		continue;
+        	}
+        	if(!dict && secret) {
+        		nlist.add(line);
+        	}
+        }
+    	System.out.println(list);
+    	System.out.println(nlist);
+    	
+    	for(String s : nlist) {
+    		String[] st = s.split(" ");
+    		for (int c=0; c<st.length; c++ ) {
+    			
+
+    		}
+    	}
+		
+	}
+	
+	private Word findMatch(String secretCode, List<Word> list) {
+		
+		List<Word> candidateMatches = getWordsOfLength (secretCode.length(), list);
+		
+		if(null != candidateMatches) {
+			Word secret = new Word(secretCode);
+			Map<Character, List<Integer>> secretWordMap = secret.getCharacterPositions();
+			
+			boolean found = false;
+			Word answer = null;
+			
+			for (Word w : candidateMatches) {
+				if(found) {
+					break;
+				}
+				Map<Character, List<Integer>> wordMap = w.getCharacterPositions();
+				
+				if(wordMap.keySet().size() == secretWordMap.keySet().size()) {
+					Set<Entry<Character, List<Integer>>> entries = secretWordMap.entrySet();
+					for (Entry<Character, List<Integer>> entry: entries) {
+						
+					}
+					
+					
+				} else {
+					continue;
+				}
+				
+			}
+			return answer;
+		} else {
+			return null;
+		}
+	}
+	
+
+
+	private List<Word> getWordsOfLength (int len, List<Word> list) {
+		if(len <=0) {
+			return null;
+		} else {
+			List<Word> l = new LinkedList<Word>();
+			for(Word w : list) {
+				if(w.length() == len) {
+					l.add(w);
+				}
+			}
+			return l;
+		}
+	}
+	
+	private static class Word {
+		private String word;
+		private Map<Character, List<Integer>> characterPositions; 
+				//= new HashMap<Character, List<Integer>>();
+		
+		public Word(String s) {
+			if(s !=null) {
+				word = s;
+				characterPositions = new HashMap<Character, List<Integer>>();
+				addCharacterPositions(s);
+			}
+		}
+
+		public String getWord() {
+			return word;
+		}
+
+		public int length() {
+			return word.length();
+		}
+
+		public Map<Character, List<Integer>> getCharacterPositions() {
+			return characterPositions;
+		}
+
+		private void addCharacterPositions(String s) {
+			char[] c = s.toCharArray();
+			for (int i=0; i<c.length; i++) {
+				if(characterPositions.containsKey(c[i])) {
+					List<Integer> list = characterPositions.get(c[i]);
+					list.add(i);
+					characterPositions.put(c[i], list);
+				} else {
+					List<Integer> list = new LinkedList<Integer>();
+					list.add(i);
+					characterPositions.put(c[i], list);
+				}
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "Word [word=" + word + ", characterPositions="
+					+ characterPositions + "]";
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime
+					* result
+					+ ((characterPositions == null) ? 0 : characterPositions
+							.hashCode());
+			result = prime * result + ((word == null) ? 0 : word.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Word other = (Word) obj;
+			if (characterPositions == null) {
+				if (other.characterPositions != null)
+					return false;
+			} else if (!characterPositions.equals(other.characterPositions))
+				return false;
+			if (word == null) {
+				if (other.word != null)
+					return false;
+			} else if (!word.equals(other.word))
+				return false;
+			return true;
+		}
+	}
+
+}

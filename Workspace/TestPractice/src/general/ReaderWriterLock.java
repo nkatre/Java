@@ -30,7 +30,7 @@ public class ReaderWriterLock {
 	public ReaderWriterLock(Resource r) {
 		super();
 		resource = r;
-		lock = new Lock();
+		lock = new Lock();  //VB : Use reentrant lock
 		resourceLock = new ResourceLockWraper(resource, lock);
 		writerQueue = new Queue<Writer>();
 		readerQueue = new Queue<Reader>();
@@ -47,7 +47,7 @@ public class ReaderWriterLock {
 	}
 	
 	public boolean seekLock(Process requestor) {
-		
+		//VB: YOU should synchronize
 		if(requestor.getClass().equals(Reader.class)) {
 			
 			//readerQueue.enQueue((Reader) requestor);
@@ -75,7 +75,10 @@ public class ReaderWriterLock {
 
 
 	public boolean releaseLock(Process requestor) {
-		
+		// VB same here. all methods shud be protected
+		// VB : YOU should chck if requeter really has the lock. 
+		// VB : LOOk at example of ReaderWriterLock usage to uunderstand what interface to use.
+		// VB : THis interface is not correct but given the interface, the implementation seems reasonable
 		if(requestor.getClass().equals(Writer.class)) {
 			
 			resourceLock.lock.writeholder = null;

@@ -1,0 +1,29 @@
+package thread;
+
+public class Test  implements Runnable {
+	
+	
+	public static void main(String[] args) {
+		Test m = new Test();
+		Thread t = new Thread(m);
+		t.setName("t");
+		Thread t1 = new Thread(m);
+		t1.setName("t1");
+		
+		t.start();
+		//Thread.yield();
+		Thread.currentThread().interrupt();
+		t1.start();
+	}
+	
+	public void run() {
+		System.out.println(Thread.currentThread().getName() + " is running");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(Thread.currentThread().getName() + " finished");
+	}
+	
+}

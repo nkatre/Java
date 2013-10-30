@@ -1,0 +1,53 @@
+package thread;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class BlockingQueue {
+
+	private final int size;
+
+	private List list = new LinkedList();
+
+	private int listSize = 0;
+
+	public BlockingQueue(int size) {
+		this.size = size;
+	}
+
+	public void enQueue(Object obj) {
+		if (null == obj)
+			return;
+
+		while(listSize >= size) {
+			try {
+				synchronized(this) {
+					this.wait();
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		list.add(obj);
+		listSize++;
+		notifyAll();
+	}
+
+	public Object deQueue() {
+		while(listSize <= 0) {
+			try {
+				synchronized(this) {
+					this.wait();
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		listSize--;
+		Object o = list.remove(0);
+		notifyAll();
+		return o;
+	}
+
+}

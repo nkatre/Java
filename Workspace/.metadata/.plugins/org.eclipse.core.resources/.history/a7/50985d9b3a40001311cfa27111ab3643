@@ -1,0 +1,17 @@
+package redo;
+
+public class PractiseDeadLockUsingThread {
+	
+	
+	private static class R implements Runnable {
+
+		@Override
+		public void run() {
+			
+			
+		}
+		
+		
+	}
+
+}

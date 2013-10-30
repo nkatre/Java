@@ -276,7 +276,7 @@ public class Deadlock {
 				resource.setHeldBy(this);
 				resourceHeld.add(resource);
 				resource.setUsed(true);
-				resourceAvailablePool.remove(resource);
+				resourceAvailablePool.remove(resource); //VB: Try to move to the outer class
 				
 				return true;
 			}
@@ -479,7 +479,7 @@ public class Deadlock {
 
 	}
 	
-	private class Node {
+	private class Node { //VB: Node is not the correct name
 		private Process process;
 		private Process pointsTo;
 		private boolean visited;

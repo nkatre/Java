@@ -1,0 +1,34 @@
+package redo;
+
+public class PractiseSimpleProducerConsumer {
+	
+	Object o;
+	
+	private static class Producer implements Runnable {
+		
+		Object o;
+		
+		public Producer(Object oo) {
+			o = oo;
+		}
+
+		@Override
+		public void run() {
+			synchronized(o) {
+				System.out.println("produced at and notified at: " +  System.currentTimeMillis());
+				notify();
+			}
+		}
+		
+	}
+	
+	private static class Producer implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+}

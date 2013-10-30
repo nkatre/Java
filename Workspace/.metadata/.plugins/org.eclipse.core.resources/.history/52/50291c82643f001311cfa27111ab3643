@@ -1,0 +1,36 @@
+package thread;
+
+import org.apache.log4j.Logger;
+
+public class TestBlockingQueue {
+	
+	public static Logger log = Logger.getLogger(TestBlockingQueue.class.getName());
+	
+	
+	public static class WriterThread implements Runnable {
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue q = new BlockingQueue(2);
+
+		public WriterThread() {
+			
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.debug("Writer thread " + id + "sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.debug("Writer thread " + id + " woke up from sleep");
+			}
+		}
+		
+		
+	}
+
+}

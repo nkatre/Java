@@ -1,0 +1,32 @@
+package redo;
+// https://www.interviewstreet.com/recruit/test/view/4e769c33164d9/4dd48afd91b0e/?randhash=8509
+import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+       
+        Scanner scanner = new Scanner(System.in);
+        List<String> list = new LinkedList<String>();
+        List<String> nlist = new LinkedList<String>();
+        
+        while(scanner.hasNext()) {
+        	String line = scanner.nextLine();
+        	//System.out.println(line);
+        	if (line.contains("dict") || line.contains("secret")) {
+        		continue;
+        	}
+        	if (line.matches("[a-zA-z\\s]*")) {
+        		 System.out.println("..." + line);
+        		list.add(line);
+        	}
+        	if (line.matches("[0-9\\s]*")) {
+        		nlist.add(line);
+        	}
+        }
+        System.out.println(list);
+        System.out.println(nlist);
+       
+    }
+}

@@ -1,0 +1,80 @@
+package thread;
+
+import org.apache.log4j.Logger;
+
+public class TestBlockingQueue {
+	
+	public static Logger log = Logger.getLogger(TestBlockingQueue.class.getName());
+	
+	
+	public static class WriterThread implements Runnable {
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue queue;
+
+		public WriterThread(BlockingQueue q, int id) {
+			this.queue = q;
+			this.id = id;
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.debug("Writer thread " + id + "sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.debug("Writer thread " + id + " woke up from sleep");
+				
+				log.debug("Writer thread " + id + " about to enqueue");
+				queue.enQueue("STRing");
+				log.debug("Writer thread " + id + " finished enqueue");
+			}
+			log.debug("Writer thread " + id + " is done");
+		}
+		
+		public void shutDown(){
+			isDone=true;
+		}
+		
+	}
+	
+	public static class ReaderThread implements Runnable {
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue queue;
+
+		public ReaderThread(BlockingQueue q, int id) {
+			this.queue = q;
+			this.id = id;
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.debug("Reader thread " + id + "sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.debug("Reader thread " + id + " woke up from sleep");
+				
+				log.debug("Reader thread " + id + " about to enqueue");
+				queue.enQueue("STRing");
+				log.debug("Reader thread " + id + " finished enqueue");
+			}
+			log.debug("Reader thread " + id + " is done");
+		}
+		
+		public void shutDown(){
+			isDone=true;
+		}
+		
+	}
+
+}

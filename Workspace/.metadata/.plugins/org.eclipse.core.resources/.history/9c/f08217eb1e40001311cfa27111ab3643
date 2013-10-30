@@ -1,0 +1,25 @@
+package redo;
+
+public class PractiseSimpleProducerConsumer {
+
+	
+	private static class Producer implements Runnable {
+
+		@Override
+		public void run() {
+			System.out.println("produced at: " +  System.currentTimeMillis());
+			notify();
+		}
+		
+	}
+	
+	private static class Producer implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+}

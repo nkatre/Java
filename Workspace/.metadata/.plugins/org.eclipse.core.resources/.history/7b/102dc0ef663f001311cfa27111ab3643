@@ -1,0 +1,122 @@
+package thread;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import general.ArrayAndStringCareerCup;
+
+import org.apache.log4j.Logger;
+
+public class TestBlockingQueue {
+	
+	public static Logger log = Logger.getLogger(TestBlockingQueue.class.getName());
+	
+	public static void main(String[] args) {
+		TestBlockingQueue test = new TestBlockingQueue();
+		BlockingQueue q  = new BlockingQueue(2);
+		
+		List<WriterThread> writingThreads = new ArrayList<WriterThread>();
+		List<ReaderThread> readingThreads = new ArrayList<ReaderThread>();
+		
+		WriterThread w;
+		ReaderThread r;
+		
+		for(int i=0; i<5; i++) {
+			w = new WriterThread(q, i);
+			writingThreads.add(new Thread(w));
+			
+			r = new ReaderThread(q, i);
+			readingThreads.add(new Thread(r));
+		}
+		
+		for(int i=0; i<5; i++) {
+			writingThreads.get(i).start();
+			readingThreads.get(i).start();
+		}
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		for(int i=0; i<5; i++) {
+			writingThreads.get(i).shutDown();
+			readingThreads.get(i).shutDown();
+		}
+		
+	}
+	
+	public static class WriterThread extends Thread{
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue queue;
+
+		public WriterThread(BlockingQueue q, int id) {
+			super(new Integer(id).toString());
+			this.queue = q;
+			this.id = id;
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.debug("Writer thread " + id + "sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.debug("Writer thread " + id + " woke up from sleep");
+				
+				log.debug("Writer thread " + id + " about to enqueue");
+				queue.enQueue("STRing");
+				log.debug("Writer thread " + id + " finished enqueue");
+			}
+			log.debug("Writer thread " + id + " is done");
+		}
+		
+		public void shutDown(){
+			isDone=true;
+		}
+		
+	}
+	
+	public static class ReaderThread extends Thread {
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue queue;
+
+		public ReaderThread(BlockingQueue q, int id) {
+			super(new Integer(id).toString());
+			this.queue = q;
+			this.id = id;
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.debug("Reader thread " + id + "sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.debug("Reader thread " + id + " woke up from sleep");
+				
+				log.debug("Reader thread " + id + " about to enqueue");
+				queue.enQueue("STRing");
+				log.debug("Reader thread " + id + " finished enqueue");
+			}
+			log.debug("Reader thread " + id + " is done");
+		}
+		
+		public void shutDown(){
+			isDone=true;
+		}
+		
+	}
+
+}

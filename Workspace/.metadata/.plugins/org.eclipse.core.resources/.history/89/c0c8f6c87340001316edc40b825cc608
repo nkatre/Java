@@ -1,0 +1,37 @@
+package redo;
+
+import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+       
+        Scanner scanner = new Scanner(System.in);
+        List<String> list = new LinkedList<String>();
+        while(scanner.hasNextLine()) {
+        	String line = scanner.nextLine();
+        }
+        int n = scanner.nextInt();
+        System.out.println(n);
+        scanner = new Scanner(System.in);
+        String s1 =  scanner.nextLine();
+        String[] s = s1.split(" ");
+        System.out.println(s1);
+        int max = 0;
+        int min = 0;
+        int pos = -1;
+        for (int i=0; i<s.length-1; i++) {
+        	int x = Integer.valueOf(s[i+1]) - Integer.valueOf(s[i]);
+        	if(max>=min) {
+        		min = x;
+        		
+        	} 
+        	if ( x> min) {
+        		max = x;
+        		pos = i;
+        	}
+        }
+        System.out.println("max:" + max + " min:" + min + " pos: " + pos);
+    }
+}

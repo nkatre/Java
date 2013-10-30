@@ -1,0 +1,20 @@
+package thread;
+
+public class Test   {
+	
+	public void run() {
+		
+		
+	}
+
+}
+
+
+public class MyRunnable implements Runnable{
+	
+	public void run() {
+		
+		
+	}
+
+}

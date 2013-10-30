@@ -1,0 +1,572 @@
+package general;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+public class TreeAndGraphCareerCup {
+
+	private static class Graph<T> {
+
+		private enum COLOR { WHITE, GREY, BLACK };
+
+		private List<Vertex<T>> vertices = new LinkedList<Vertex<T>>();
+
+		public boolean addVertex(Vertex<T> v) {
+			vertices.add(v);
+			return true;
+		}
+
+		public boolean addConnection(Vertex<T> from, Vertex<T> to) {
+			if ((null == from) ||(null == to))
+				return false;
+
+			from.connectedTo.add(to);
+			return true;
+		}
+
+		private void initBeforeSearch() {
+			if(null == vertices)
+				return;
+
+			for(int i=0; i<vertices.size(); i++) {
+				Vertex<T> v = vertices.get(i);
+				v.colour = COLOR.WHITE;
+				v.parent = null;
+				v.distance = 0;
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "Graph [vertices=" + vertices + "]";
+		}
+
+		private static class Vertex<T> {
+
+			private T data;
+			int distance=0;
+			COLOR colour = COLOR.WHITE;
+			Vertex<T> parent;
+
+			private List<Vertex<T>> connectedTo = new LinkedList<Vertex<T>>();			
+
+			public Vertex (T d){
+				this.data = d;
+			}
+
+			@Override
+			public String toString() {
+				return "Vertex[" + data + "]";
+			}
+			/*public String toString() {
+				return "Vertex [data=" + data + ", distance=" + distance
+						+ ", colour=" + colour + "]";
+			}*/
+
+		}
+
+		// bfs
+		public boolean isReachable(Vertex<T> from, Vertex<T> to) {  // VB: Make this method and other public method synchronized thread-safe
+			//VB: You are using temporary DS other than Adjacency list to mark color, distance path etc.
+			// If you can create them as local variables instead of member variables, then this method is not altering graph instance and is better
+
+			initBeforeSearch();
+			from.colour = COLOR.GREY;
+			Queue<Vertex<T>> queue = new Queue<Graph.Vertex<T>>();
+			queue.enQueue(from);
+
+			while(queue.size() !=0) {
+				Vertex<T> v = queue.poll();
+				List<Vertex<T>> connectedTo = v.connectedTo;
+
+				if (null == connectedTo) {
+					return false;
+				}
+				for (int i=0; i<connectedTo.size(); i++) {
+					Vertex<T> y = connectedTo.get(i);
+
+					if(y.colour==COLOR.WHITE) {
+						y.colour=COLOR.GREY;
+						y.distance = v.distance + 1;
+						y.parent = v;
+						queue.enQueue(y);
+					}
+
+					if(y == to) {
+						return true;
+					}
+				}
+				v.colour = COLOR.BLACK;
+			}
+			return false;
+		}
+
+		/*
+		 * Given a directed graph, design an algorithm to find out whether there is a route between two nodes 
+		 */
+		public List<Vertex<T>> getPath(Vertex<T> from, Vertex<T> to) {	
+			List<Vertex<T>>  path = new LinkedList<Vertex<T>>();
+
+			if(isReachable(from, to)) {
+				Vertex<T> v = to;
+
+				path.add(to);
+
+				while (v != from) {
+					path.add(0, v.parent);
+					v = v.parent;
+				}
+
+			} else {
+				return null;
+			}
+			return path;
+		}
+	}
+
+
+	private static class BST<T extends Comparable<? super T>> {
+
+		Node<T> root;
+
+		public boolean add(T data) {
+			Node<T> n = new Node<T>(data);
+
+			if(null==root) {
+				root = n;
+				return true;
+			}	
+
+			Node<T> x = root;
+
+			while(null != x) {
+				int c = x.compareTo(n);
+
+				/*if(x.isLeaf()) {
+					if(c >= 0) {
+						x.leftChild = n;
+						n.parent = x;
+						return true;
+					} else {
+						x.rightChild = n;
+						n.parent = x;
+						return true;
+					}
+				} */
+
+				if(c < 0) {
+					if(null == x.rightChild) {
+						x.rightChild = n;
+						n.parent = x;
+						return true;
+					}
+					x = x.rightChild;	
+				} else {
+					if(null == x.leftChild) {
+						x.leftChild = n;
+						n.parent = x;
+						return true;
+					}
+					x = x.leftChild;	
+				}
+
+			}
+			return true;
+		}
+
+		/*
+		 * Implement a function to check if a tree is balanced 
+		 * For the purposes of this question, a balanced tree is defined to be a tree such that 
+		 * no two leaf nodes differ in distance from the root by more than one 
+		 * 
+		 * The idea is very simple: the difference of min depth and max depth should not exceed 1, 
+		 * since the difference of the min and the max depth is the maximum distance difference possible in the tree 
+		 */
+		public boolean isBalanced() {
+			return ((maxHeight(root) - minHeight(root)) <= 1);
+		}
+
+		private int maxHeight(Node<T> node) {
+			if (null == node) {
+				return 0;
+			}
+			return 1 + Math.max(maxHeight(node.leftChild) , maxHeight(node.rightChild));
+		}
+
+		private int minHeight(Node<T> node) {
+			if (null == node) {
+				return 0;
+			}
+			return 1 + Math.min(minHeight(node.leftChild) , minHeight(node.rightChild));
+		}
+
+		/*
+		 *  Given a sorted (increasing order) array, write an algorithm to create a binary tree with minimal height 
+		 */
+		public Node<T> buildBalancedTree(T[] array) {
+			if((null == array) || (array.length == 0))
+				return null;
+
+			return buildTree(array, 0, array.length-1);
+		}
+
+		private Node<T> buildTree(T[] array, int start, int end)  {
+			if(start > end) {
+				return null;
+			}
+
+			int mid = (start + end)/2;
+
+			Node<T> n = new Node<T>(array[mid]);
+			n.leftChild = buildTree(array, start, mid-1);
+			n.rightChild = buildTree(array, mid+1, end);
+
+			boolean exist = (n.leftChild == null)? false: true;
+			if(exist)
+				n.leftChild.parent = n;
+
+			exist = (n.rightChild == null)? false: true;
+			if(exist)
+				n.rightChild.parent = n;
+
+			return n;
+		}
+
+		/*
+		 * Write an algorithm to find the ‘next’ node (i e , in-order successor) of a given node in a binary search tree 
+		 * where each node has a link to its parent 
+		 */
+		public Node<T> inOrderSuccessor(Node<T> node) {
+			if(null == node)
+				return null;
+
+			if(node.rightChild == null) {
+
+				if (node.compareTo(node.parent) <= 0)
+					return node.parent;
+
+				Node<T> p = node.parent;
+				while (p.compareTo(p.parent) > 0){
+
+					if(p.parent == null)
+						return null;
+				}
+				return p.parent;
+
+			}
+
+			Node<T> x = node.rightChild;
+
+			while(x != null) {
+				if (null == x.leftChild) {
+					return x;
+				}
+
+				x = x.leftChild;
+			}
+
+			return x;
+		}
+
+		/*
+		 * Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree 
+		 * Avoid storing additional nodes in a data structure 
+		 * NOTE: This is not necessarily a binary search tree 
+		 */
+		public Node<T> firstCommonAncestor(Node<T> n1, Node<T> n2) {
+
+			if((null==n1) || (null==n2)) {
+				return null;
+			}
+
+			if(n1.equals(n2)) {
+				return n1;
+			}
+
+			if(n1.compareTo(n2) > 0) {
+				Node<T> temp = n1;
+				n1 = n2;
+				n2 = temp;
+			}
+
+			Set<Node<T>> set = new HashSet<Node<T>>();
+			Node<T> c = n1;
+			set.add(c);
+
+			while (c!=null) {
+				c = c.parent;
+				set.add(c);
+			}
+
+			c = n2;
+			while (c!=null) {
+				if(set.contains(c)) {
+					return c;
+				}
+				c = c.parent;
+			}
+
+			return n1;
+
+		}
+
+		public Node<T> firstCommonAncestorBST(Node<T> n1, Node<T> n2) {
+
+			if((null==n1) || (null==n2)) {
+				return null;
+			}
+
+			if(n1.equals(n2) || (n1==n2) ) {
+				return n1;
+			}
+
+			if(n1.compareTo(n2) > 0) {
+				Node<T> temp = n1;
+				n1 = n2;
+				n2 = temp;
+			}
+
+			Node<T> n1P = n1;
+			Node<T> n2P = n2;
+
+			while(n1P.compareTo(n2P) <= 0){
+
+				if(n1P==n2P) {
+					return n1P;
+				}
+
+				if((n1P == n2)||(n1P.parent == n2)) {
+					return n2;
+				}
+				
+				if(n2P == n1) {
+					return n1;
+				}
+				
+				if((null == n1P.parent) || (null == n2P.parent) || (n1P.compareTo(n2P) >= 0) ){
+					break;
+				}
+
+				n1P = n1P.parent;
+				n2P = n2P.parent;
+				
+			}
+
+			return n1P;
+
+		}
+
+		/*
+		 * You are given a binary tree in which each node contains a value 
+		 * Design an algorithm to print all paths which sum up to that value 
+		 * Note that it can be any path in the tree 
+		 */
+		public List<List<Node<Integer>>> getAllPathThatSumToValue(Integer value) {
+			
+			List<Node<Integer>> list =  (List<Node<Integer>>) inOrderTravesal(Node<Integer> root);
+			
+			if (value.compareTo(list.get(0).data) < 0) {
+				return null;
+			}
+			
+			T totalSum;
+			for(Node<T> n: list) {
+				totalSum + n.data;
+				
+			}
+
+			return null;
+		}
+
+		
+		public List<Node<T>> inOrderTravesal(Node<T> root) {
+			List<Node<T>> list = new LinkedList<Node<T>>();
+			
+			if(null == root) {
+				return null;
+			}
+			
+			if(null !=  root.leftChild)
+				list.addAll(inOrderTravesal(root.leftChild));
+			list.add(root);
+			if(null !=  root.rightChild)
+				list.addAll(inOrderTravesal(root.rightChild));
+			
+			return list;
+		}
+		
+		@Override
+		public String toString() {
+			return "BinaryTree [root=" + root + "]";
+		}
+
+		private static class Node<T extends Comparable<? super T>> implements Comparable<Node<T>>{
+			private T data;
+			private Node<T> leftChild;
+			private Node<T> rightChild;
+			private Node<T> parent;
+
+			Node (T data2) {
+				super();
+				this.data = data2;
+			}
+
+			public boolean isLeaf() {
+				if((null==leftChild) && (null==rightChild))
+					return true;
+				return false;
+			}
+
+			@Override
+			public String toString() {
+				return data + "";
+			}
+			/*
+			public String toString() {
+				return "Node [data=" + data + ", leftChild=" + ((null == leftChild) ? null : leftChild)
+						+ ", rightChild=" + ((null == rightChild) ? null : rightChild) 
+						+ ", parent=" + ((null == parent) ? null : parent.data) + "]";
+			}
+			*/
+			
+			@Override
+			public int hashCode() {
+				final int prime = 31;
+				int result = 1;
+				result = prime * result
+						+ ((data == null) ? 0 : data.hashCode());
+				result = prime * result
+						+ ((leftChild == null) ? 0 : leftChild.hashCode());
+				result = prime * result
+						+ ((rightChild == null) ? 0 : rightChild.hashCode());
+				return result;
+			}
+
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+				Node<T> other = (Node<T>) obj;
+				if (data == null) {
+					if (other.data != null)
+						return false;
+				} else if (!data.equals(other.data))
+					return false;
+				if (leftChild == null) {
+					if (other.leftChild != null)
+						return false;
+				} else if (!leftChild.equals(other.leftChild))
+					return false;
+				if (rightChild == null) {
+					if (other.rightChild != null)
+						return false;
+				} else if (!rightChild.equals(other.rightChild))
+					return false;
+				return true;
+			}
+
+			@Override
+			public int compareTo(Node<T> o) {
+				return data.compareTo(o.data);
+			}
+		}
+	}
+
+	// graph test cases
+	/*
+	public static void main(String[] args) {
+
+		Graph<String> graph = new Graph<String>();
+
+		Graph.Vertex<String> jeya = new Graph.Vertex<String>("Jeyabarani");
+		Graph.Vertex<String> balaji = new Graph.Vertex<String>("Balaji");
+		Graph.Vertex<String> av = new Graph.Vertex<String>("AditriVaishnavi");
+		Graph.Vertex<String> jacky = new Graph.Vertex<String>("Miss.Jacky");
+
+		jeya.connectedTo.add(balaji);
+		//balaji.connectedTo.add(av);
+		av.connectedTo.add(jeya);
+		av.connectedTo.add(jacky);
+
+		graph.addVertex(jeya);
+		graph.addVertex(balaji);
+		graph.addVertex(av);
+		graph.addVertex(jacky);
+
+		System.out.println("Path:" + graph.getPath(jeya, jacky));
+		//System.out.println(jacky.parent);
+		System.out.println("Graph:" + graph);
+
+	}
+	 */
+	// binary tree test cases
+
+	public static void main(String[] args) {
+
+		BST<Integer> tree = new BST<Integer>();
+		tree.add(5);
+		tree.add(11);
+		tree.add(4);
+		tree.add(9);
+		tree.add(10);
+		tree.add(12);
+		tree.add(1);
+		tree.add(2);
+		//System.out.println(tree.isBalanced());
+		tree.add(13);
+		//System.out.println(tree.isBalanced());
+		//System.out.println(tree.root.data);
+		//System.out.println(tree.inOrderSuccessor(tree.root));
+		
+		System.out.println(tree.inOrderTravesal(tree.root));
+		/*
+		System.out.println("================================================");
+		// test case 1 comparing result of firstCommonAncestor and irstCommonAncestorBST
+		System.out.println(tree.root.rightChild.leftChild.rightChild.data + " and " + tree.root.rightChild.rightChild.rightChild.data);
+		System.out.println(tree.firstCommonAncestor(tree.root.rightChild.leftChild.rightChild, tree.root.rightChild.rightChild.rightChild).data);
+		System.out.println(tree.firstCommonAncestorBST(tree.root.rightChild.leftChild.rightChild, tree.root.rightChild.rightChild.rightChild).data);
+
+		System.out.println("================================================");
+		// test case 2 comparing result of firstCommonAncestor and irstCommonAncestorBST
+		System.out.println(tree.root.leftChild.data + " and " + tree.root.leftChild.leftChild.rightChild.data);
+		System.out.println(tree.firstCommonAncestor(tree.root.leftChild, tree.root.leftChild.leftChild.rightChild).data);
+		System.out.println(tree.firstCommonAncestorBST(tree.root.leftChild, tree.root.leftChild.leftChild.rightChild).data);
+
+		System.out.println("================================================");
+		// test case 3 
+		System.out.println(tree.root.leftChild.data + " and " + tree.root.leftChild.data);
+		System.out.println(tree.firstCommonAncestor(tree.root.leftChild, tree.root.leftChild.leftChild.rightChild).data);
+		System.out.println(tree.firstCommonAncestorBST(tree.root.leftChild, tree.root.leftChild).data);
+
+		System.out.println("================================================");
+		// test case 4 
+		System.out.println(null + " and " + tree.root.leftChild.leftChild.rightChild.data);
+		System.out.println(tree.firstCommonAncestor(null, tree.root.leftChild.leftChild.rightChild));
+		System.out.println(tree.firstCommonAncestorBST(null, tree.root.leftChild));
+
+		System.out.println("================================================");
+		// test case 5 
+		System.out.println(tree.root.leftChild.leftChild.rightChild.data + " and " + tree.root.rightChild.rightChild.rightChild.data);
+		System.out.println(tree.firstCommonAncestor(tree.root.leftChild.leftChild.rightChild, tree.root.rightChild.rightChild.rightChild).data);
+		System.out.println(tree.firstCommonAncestorBST(tree.root.leftChild.leftChild.rightChild, tree.root.rightChild.rightChild.rightChild).data);
+
+		
+		BST<Integer> tree = new BST<Integer>();
+		Integer[] array = new Integer[10];
+		for(int i=0; i<10; i++) {
+			array[i] = i;
+		}
+
+		System.out.println(tree.buildBalancedTree(array));
+		 */
+		
+		
+	}
+
+}

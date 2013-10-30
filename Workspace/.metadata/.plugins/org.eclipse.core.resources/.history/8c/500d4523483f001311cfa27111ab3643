@@ -1,0 +1,28 @@
+package thread;
+
+public class Test   {
+	
+	
+	public static void main(String[] args) {
+		MyRunnable m = new MyRunnable();
+		Thread t = new Thread(m);
+		Thread t1 = new Thread(m);
+		System.out.println(t.isAlive());
+		t.start();
+		//t.setName("TESt");
+		System.out.println(t.getName());
+		System.out.println(t1.getName());
+		System.out.println(t.MAX_PRIORITY);
+	}
+	
+}
+
+
+class MyRunnable implements Runnable{
+	
+	public void run() {
+		System.out.println("in MyRunnable  class");
+		System.out.println();
+	}
+
+}

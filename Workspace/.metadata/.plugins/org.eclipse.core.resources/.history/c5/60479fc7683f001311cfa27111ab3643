@@ -1,0 +1,144 @@
+package thread;
+
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import general.ArrayAndStringCareerCup;
+
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+
+public class TestBlockingQueue {
+	
+	public static Logger log = Logger.getLogger(TestBlockingQueue.class.getName());
+	
+	public static void main(String[] args) {
+		ConsoleAppender ca = new ConsoleAppender();
+		ca.setWriter(new OutputStreamWriter(System.out));
+		ca.setLayout(new PatternLayout("%-5p [%t]: %m%n"));
+		log.addAppender(ca);
+		
+		TestBlockingQueue test = new TestBlockingQueue();
+		BlockingQueue q  = new BlockingQueue(2);
+		
+		List<WriterThread> writingThreads = new ArrayList<WriterThread>();
+		List<ReaderThread> readingThreads = new ArrayList<ReaderThread>();
+		
+		WriterThread w;
+		ReaderThread r;
+		
+		for(int i=0; i<2; i++) {
+			w = new WriterThread(q, i);
+			writingThreads.add(w);
+			
+			r = new ReaderThread(q, i);
+			readingThreads.add(r);
+		}
+		
+		for(int i=0; i<2; i++) {
+			writingThreads.get(i).start();
+			readingThreads.get(i).start();
+		}
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		for(int i=0; i<2; i++) {
+			writingThreads.get(i).shutDown();
+			readingThreads.get(i).shutDown();
+		}
+		
+		for(int i=0; i<2; i++) {
+			try {
+				writingThreads.get(i).join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			try {
+				readingThreads.get(i).join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public static class WriterThread extends Thread{
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue queue;
+
+		public WriterThread(BlockingQueue q, int id) {
+			super(new Integer(id).toString());
+			this.queue = q;
+			this.id = id;
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.info("Writer thread " + id + " sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.info("Writer thread " + id + " woke up from sleep");
+				
+				log.info("Writer thread " + id + " about to enqueue");
+				queue.enQueue("STRing : " + id);
+				log.info("Writer thread " + id + " finished enqueue");
+			}
+			log.info("Writer thread " + id + " is done");
+		}
+		
+		public void shutDown(){
+			isDone=true;
+		}
+		
+	}
+	
+	public static class ReaderThread extends Thread {
+		
+		private volatile boolean isDone;
+		private int id;
+		private BlockingQueue queue;
+
+		public ReaderThread(BlockingQueue q, int id) {
+			super(new Integer(id).toString());
+			this.queue = q;
+			this.id = id;
+		}
+		
+		@Override
+		public void run() {
+			while(!isDone) {
+				log.info("Reader thread " + id + "  sleeping for 1 second");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				log.info("Reader thread " + id + " woke up from sleep");
+				
+				log.info("Reader thread " + id + " about to dequeue");
+				Object o =  queue.deQueue();
+				
+				log.info("Reader thread " + id + " finished dequeue " + o);
+			}
+			log.info("Reader thread " + id + " is done");
+		}
+		
+		public void shutDown(){
+			isDone=true;
+		}
+		
+	}
+
+}

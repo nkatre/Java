@@ -1,0 +1,18 @@
+package thread;
+
+public class Test   {
+	
+	MyRunnable m = new MyRunnable();
+	Thread t = new Thread(m);
+	t.start(m);
+}
+
+
+class MyRunnable implements Runnable{
+	
+	public void run() {
+		System.out.println("in MyRunnable  class");
+		
+	}
+
+}

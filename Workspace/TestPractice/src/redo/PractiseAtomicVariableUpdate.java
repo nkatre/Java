@@ -1,0 +1,101 @@
+package redo;
+
+public class PractiseAtomicVariableUpdate {
+	
+	private static int number;
+	
+	public static void main(String[] s) {
+		
+		// ----------- test case 0 ----------- two parallel threads with synchronization
+				MyRNew r0 = new  MyRNew(number);
+				
+		  		Thread t10 = new Thread(r0);
+		  		Thread t20 = new Thread(r0);
+		  		
+		  		t10.start();
+		  		t20.start();
+		  		
+		  		try {
+		  			t10.join();
+					t20.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+		  		  		
+		  		System.out.println(Thread.currentThread().getName() + " " + r0.num + "\n");
+		
+		// ----------- test case 1 ----------- two parallel threads without synchronization
+		MyR r1 = new  MyR(number);
+		
+  		Thread t11 = new Thread(r1);
+  		Thread t21 = new Thread(r1);
+  		
+  		t11.start();
+  		t21.start();
+  		
+  		try {
+  			t11.join();
+			t21.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+  		  		
+  		System.out.println(Thread.currentThread().getName() + " " + r1.num + "\n");
+  		
+  		// ----------- test case 2 ----------- threads joined ... threads without synchronization
+		MyR r = new  MyR(number);
+		
+  		Thread t1 = new Thread(r);
+  		Thread t2 = new Thread(r);
+  		
+  		t1.start();
+  		try {
+			t1.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+  		t2.start();
+  		try {
+			t2.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+  		  		
+  		System.out.println(Thread.currentThread().getName() + " " + r.num);
+	}
+	
+	private static class MyR implements Runnable {
+		private ThreadLocal<Integer> num = new ThreadLocal<Integer>();
+		
+		public MyR(int n) {
+			num.set(n);
+		}
+		
+		public void run() {
+			for (int i=0; i<100000; i++) {
+				num.set(num.get()+1); 
+				//System.out.println(Thread.currentThread().getName() + " " + num);
+			}
+			System.out.println(Thread.currentThread().getName() + " " + num);
+		}
+	}
+	
+	private static class MyRNew implements Runnable {
+		private Integer num;
+		
+		public MyRNew(int n) {
+			num = n;
+		}
+		
+		public void run() {
+			for (int i=0; i<10000; i++) {
+					synchronized (this) {
+					num = num+1;
+				}
+				
+			}
+			System.out.println(Thread.currentThread().getName() + " " + num);
+		}
+	}
+
+}
